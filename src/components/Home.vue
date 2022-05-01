@@ -5,7 +5,7 @@
             <div class="background__right"></div>
         </div>
 
-        <geolocation-info :city="city" @click="$router.push('/search')"></geolocation-info>
+        <geolocation-info :city="city" @click.prevent="$router.push('/search')"></geolocation-info>
         <weather-info :temp="temp" :description="description"></weather-info>
 
         <div class="choice-locaton" @click="$router.push('/search')">

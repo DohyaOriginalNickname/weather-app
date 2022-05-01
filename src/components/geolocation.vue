@@ -1,6 +1,6 @@
 <template>
     <div>
-        <a @click.prevent class="geolocation">
+        <a class="geolocation">
             <div>
                 <img src="../assets/Vector.png" class="geolocation__logo">
             </div>
@@ -22,6 +22,7 @@ export default {
         display: flex;
         padding: 5px;
         margin: 0 10px;
+        cursor: pointer;
     }
     .geolocation__logo{
         height: 21px;
