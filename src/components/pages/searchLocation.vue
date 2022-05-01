@@ -1,16 +1,15 @@
 <template>
-  <div>
-    <router-view></router-view>
-  </div>
+    <div>
+        <input type="text">
+    </div>
 </template>
 
 <script>
 export default {
-  
+    
 }
 </script>
 
 <style scoped>
-  
-</style>
 
+</style>
