@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import SearchLocation from '@/components/pages/searchLocation'
+import SearchLocation from '@/components/searchLocation'
 import Home from '@/components/Home'
 
 const routes = [

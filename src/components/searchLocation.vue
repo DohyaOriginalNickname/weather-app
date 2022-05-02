@@ -13,16 +13,11 @@
             >
             <img src="@/assets/focus.png" alt="" class="search__target">
         </div>
-        <div class="something">
+        <div :class="{ antisomething: touch === false}">
             <div v-if="touch === false">
-                <div v-if="favorite === true">
-                    <p>Какие-то избранные города</p>
-                </div>
-                <div v-else>
-                    <p>У вас нету избранных городов</p>
-                </div>
+                <favorite-list :favorite="favorite"></favorite-list>
             </div>
-            <div v-else>
+            <div v-else class="something">
                 <p>Введите название города</p>
             </div>
         </div>
@@ -30,12 +25,16 @@
 </template>
 
 <script>
+import favoriteList from './favoriteList.vue'
 export default {
     data(){
         return{
             touch: false,
-            favorite: false
+            favorite: true
         }
+    },
+    components:{
+        favoriteList
     }
 }
 </script>
@@ -71,10 +70,13 @@ export default {
         height: 24px;
         left: calc(50% - 343px/2);
         top: calc(50% - 24px/2 + 0.5px);
-        font-weight: 400;
         font-size: 16px;
         line-height: 24px;
         text-align: center;
         color: #B4B4B4;
+    }
+    .antisomething{
+        left: 0px;
+        top: 108px;
     }
 </style>
