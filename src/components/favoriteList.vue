@@ -35,7 +35,7 @@
 <script>
 import snackbar from './snackbar.vue'
 export default {
-  components: { snackbar },
+    components: { snackbar },
     props:{
         favorite:{
             type: Boolean
@@ -58,9 +58,6 @@ export default {
             setTimeout(()=>{ x.className = x.className.replace("show", "") }, 2000)
         }
     },
-    compotnents: {
-        snackbar
-    }
 }
 </script>
 
