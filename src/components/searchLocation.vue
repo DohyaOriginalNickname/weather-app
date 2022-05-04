@@ -10,6 +10,7 @@
                 class="search__input" 
                 @focus="touch = true" 
                 @blur="touch = false"
+                v-model="searchCity"
             >
             <img src="@/assets/focus.png" alt="" class="search__target">
         </div>
@@ -17,25 +18,54 @@
             <div v-if="touch === false">
                 <favorite-list :favorite="favorite"></favorite-list>
             </div>
-            <div v-else class="something">
-                <p>Введите название города</p>
+            <div v-else>
+                <div v-if=" searchCity === '' ">
+                    <p v-if="historyCities.length === 0" class="something">Введите название города</p>
+                    <div v-else>
+                        <search-history :historyCities = "historyCities"></search-history>
+                    </div>
+                </div>
+                <div v-else>
+                    <search-city :arrayCities = "filtredCity"></search-city>
+                </div>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-import favoriteList from './favoriteList.vue'
+import favoriteList from './searchComponents/favoriteList.vue'
+import SearchCity from './searchComponents/searchCity.vue'
+import SearchHistory from './searchComponents/searchHistory.vue'
 export default {
     data(){
         return{
             touch: false,
-            favorite: true
+            favorite: false,
+            arrayCities: [
+                {country:'Казахстан',city:'Астана',weather:'Переменная облачность',temp:'+7° С', id: '1',},
+                {country:'Нидерланды', city:'Амстердам',weather:'Гроза',temp:'+15° С', id:'2',},
+                {country:'Венгрия', city:'Будапешт',weather:'Гроза',temp:'+11° С', id:'3',},
+            ],
+            searchCity: ''
         }
     },
     components:{
-        favoriteList
-    }
+        favoriteList,
+        SearchHistory,
+        SearchCity
+    },
+    computed:{
+        filtredCity(){
+            return this.arrayCities.filter(name => {
+                return name.city.toLowerCase().indexOf(this.searchCity.toLowerCase()) !== -1
+            })
+        },
+        historyCities(){
+            return this.$store.state.searchHistory
+        }
+    },
+
 }
 </script>
 
@@ -76,7 +106,6 @@ export default {
         color: #B4B4B4;
     }
     .antisomething{
-        left: 0px;
         top: 108px;
     }
 </style>

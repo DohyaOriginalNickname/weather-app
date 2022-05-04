@@ -15,8 +15,8 @@
 </template>
 
 <script>
-import Weather from './weather.vue'
-import GeoLoc from './geolocation.vue'
+import Weather from './HomeComponents/weather.vue'
+import GeoLoc from './HomeComponents/geolocation.vue'
 export default {
         data(){
             return{

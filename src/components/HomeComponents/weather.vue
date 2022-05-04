@@ -1,7 +1,7 @@
 <template>
     <div class="weather">
         <div class="weather__icon">
-            <img src="../assets/weather-icon/Union.png" alt="">
+            <img src="@/assets/weather-icon/Union.png" alt="">
         </div>
 
         <div class="weather__temp">

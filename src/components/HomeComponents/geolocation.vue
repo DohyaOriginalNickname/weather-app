@@ -2,7 +2,7 @@
     <div>
         <a class="geolocation">
             <div>
-                <img src="../assets/Vector.png" class="geolocation__logo">
+                <img src="@/assets/Vector.png" class="geolocation__logo">
             </div>
             <div class="geolocation__text">
                 <h3>{{city}}</h3>

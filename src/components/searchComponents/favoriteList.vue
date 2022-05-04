@@ -2,7 +2,7 @@
     <div v-if="favorite === true">
         <div class="favorite-list border" v-for="log in cities" :key="log.id">
             <div>
-                <img src="../assets/weather-icon/SunCloudy.png" class="favorite-list__image">
+                <img src="@/assets/weather-icon/SunCloudy.png" class="favorite-list__image">
             </div>
             <div class="favorite-list__info">
                 <div>
@@ -23,9 +23,8 @@
                 >
             </div>
         </div>
-
+        
         <snackbar></snackbar>
-
     </div>
     <div v-else class="something">
         <p>У вас нету избранных городов</p>
