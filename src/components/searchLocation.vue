@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div >
         <div class="search">
             <a @click.prevent="$router.push('/')">
                 <img src="@/assets/arrow.png" alt="" class="search__arrow">
@@ -9,7 +9,7 @@
                 placeholder="Поиск локации" 
                 class="search__input" 
                 @focus="touch = true" 
-                @blur="touch = false"
+                @blur="blur()"
                 v-model="searchCity"
             >
             <img src="@/assets/focus.png" alt="" class="search__target">
@@ -20,9 +20,9 @@
             </div>
             <div v-else>
                 <div v-if=" searchCity === '' ">
-                    <p v-if="historyCities.length === 0" class="something">Введите название города</p>
+                    <p v-if="historyCities === null || historyCities.lenght === 0" class="something">Введите название города</p>
                     <div v-else>
-                        <search-history :historyCities = "historyCities"></search-history>
+                        <search-history :historyCities = "historyCities" ></search-history>
                     </div>
                 </div>
                 <div v-else>
@@ -41,7 +41,7 @@ export default {
     data(){
         return{
             touch: false,
-            favorite: false,
+            favorite: true,
             arrayCities: [
                 {country:'Казахстан',city:'Астана',weather:'Переменная облачность',temp:'+7° С', id: '1',},
                 {country:'Нидерланды', city:'Амстердам',weather:'Гроза',temp:'+15° С', id:'2',},
@@ -65,7 +65,16 @@ export default {
             return this.$store.state.searchHistory
         }
     },
-
+    methods:{
+        blur(){
+            setTimeout(()=>{
+                this.touch = false
+            }, 50)
+        }
+    },
+    created(){
+        this.$store.dispatch('getHistory')
+    }
 }
 </script>
 

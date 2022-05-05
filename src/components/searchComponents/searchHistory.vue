@@ -2,7 +2,7 @@
     <div>
         <div class="history">
             <div class="history__text">История поиска</div>
-            <div class="history__clear" @click="$store.commit('deleteHistory')">Очистить</div>
+            <div class="history__clear" @click="$store.dispatch('deleteHistory')">Очистить</div>
         </div>
         <div class="search-log border" v-for="log in historyCities" :key="log">
             <div>

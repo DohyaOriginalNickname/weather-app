@@ -3,7 +3,7 @@
         <div 
             v-for="city in arrayCities" 
             :key="city.id"
-            @click="$store.commit('addToHistory',city)"
+            @click="$store.dispatch('addToHistory',city)"
         >
             <div class="country">
                 <div class="country__text">{{city.country}}</div>

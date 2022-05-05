@@ -20,6 +20,7 @@
                     src="@/assets/BlueStar.png" 
                     @click.prevent="log.delete = true" 
                     @click="DeleteCity"
+                    class="favorite-list__star"
                 >
             </div>
         </div>
@@ -83,9 +84,16 @@ export default {
         color: #B4B4B4;
     }
     .favorite-list__image{
+        
         width: 82px; 
         height:82px;
         margin: 0 16px;
+    }
+
+    .favorite-list__star{
+        position: absolute; 
+        right: 0; 
+        margin: 3px 18px;
     }
 
     .border{
