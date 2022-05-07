@@ -5,39 +5,75 @@
             <div class="background__right"></div>
         </div>
 
-        <geolocation-info :city="city" @click.prevent="$router.push('/search')"></geolocation-info>
-        <weather-info :temp="temp" :description="description"></weather-info>
-
-        <div class="choice-locaton" @click="$router.push('/search')">
-            <button class="choice-location__button">Выбрать локацию</button>
+        <div class="geolocation">
+            <geolocation-info 
+                :nameCity="city.city"
+                @click="$router.push('/search')"
+            ></geolocation-info>
+            <div v-if="city.city !== 'Город не определен'" class="star">
+                <img src="@/assets/Stars/EmptyStar.png" @click="addToFavoriteCity()">
+            </div>
         </div>
+        
+        <weather-info :temp="city.temp" :description="city.weather"></weather-info>
+
+        <div>
+            <div 
+                class="choice-locaton" 
+                @click="$router.push('/search')" 
+                v-if="city.city === 'Город не определен'"
+            >
+                <button class="choice-location__button">Выбрать локацию</button>
+            </div>
+            <div v-else>
+                <today-info></today-info>
+            </div>
+        </div>
+        
+        <snackbar :addFavorite="addFavorite">Локация добавлена в избранное</snackbar>
+
     </div>
 </template>
 
 <script>
 import Weather from './HomeComponents/weather.vue'
 import GeoLoc from './HomeComponents/geolocation.vue'
+import TodayInfo from './HomeComponents/todayInfo.vue'
+import snackbar from './UI/snackbar.vue'
 export default {
-        data(){
-            return{
-                city: 'Город не определен',
-                temp: '-',
-                description: '-'
-            }
-        },
+    data(){
+        return{
+            addFavorite: true
+        }
+    },
     components:{
         weatherInfo: Weather,
-        geolocationInfo: GeoLoc
+        geolocationInfo: GeoLoc,
+        TodayInfo,
+        snackbar
+    },
+    computed: {
+        city(){
+            return this.$store.state.search.city
+        }
+    },
+    methods: {
+        addToFavoriteCity(){
+            this.$store.commit('addFavoriteCity', this.city)
+            const x = document.getElementById('snackbar')
+            x.className = 'show'
+            setTimeout(()=>{ x.className = x.className.replace("show", "") }, 2000)
+        }
     }
 }
 </script>
 
 <style scoped>
     .wrapper{
-    background-color: #47B1E6;
-    height: 667px;
+        position: relative;
+        background-color: #47B1E6;
+        height: 667px;
     }
-
     .background__left{
         background-image: url("../assets/Background/Vector 12.png");
         position: absolute;
@@ -52,12 +88,10 @@ export default {
         min-width: 230px;
         height: 280px;
     }
-
     .choice-locaton{
         display: flex;
         justify-content: center;
     }
-
     .choice-location__button{
         min-width: 200px;
         height: 56px;
@@ -66,5 +100,16 @@ export default {
         background-color: white;
         color:#47B1E6;
         font-size:16px;
+    }
+    .geolocation{
+        display: flex;
+        padding: 5px;
+        margin: 0 10px;
+        cursor: pointer;
+    }
+    .star{
+        position: absolute;
+        right: 0;
+        margin: 0 18px;
     }
 </style>

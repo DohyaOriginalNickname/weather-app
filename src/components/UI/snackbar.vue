@@ -1,10 +1,22 @@
 <template>
     <div id="snackbar">
         <img src="@/assets/Succses.png" alt="">
-        <p class="snackbar__text">Локация удалена</p>
-        <p class="snackbar__return">Отменить</p>
+        <p class="snackbar__text"><slot></slot></p>
+        <p class="snackbar__return" v-if="!addFavorite">Отменить</p>
     </div>
 </template>
+
+<script>
+export default {
+    props: {
+        addFavorite:{
+            type: Boolean,
+            default: false
+        }
+    }
+}
+</script>
+
 
 <style scoped>
     #snackbar{
@@ -39,7 +51,7 @@
         to { opacity: 0;}
     }
     .snackbar__text{
-        width: 123px;
+        min-width: 123px;
         height: 24px;
         left: calc(50% - 123px/2 - 32px);
         top: calc(50% - 24px/2);

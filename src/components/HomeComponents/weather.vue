@@ -1,7 +1,7 @@
 <template>
     <div class="weather">
-        <div class="weather__icon">
-            <img src="@/assets/weather-icon/Union.png" alt="">
+        <div >
+            <img src="@/assets/weather-icon/Union.png" alt="" class="weather__icon">
         </div>
 
         <div class="weather__temp">
@@ -16,7 +16,20 @@
 
 <script>
 export default {
-    props:['temp','description']
+    props:{
+        temp:{
+            type: String,
+            default: '-'
+        },
+        description:{
+            type: String,
+            default: '-'
+        },
+        image:{
+            type: String,
+            default: '@/assets/weather-icon/Union.png'
+        }
+    }
 }
 </script>
 
@@ -26,7 +39,12 @@ export default {
         color: white;
         margin: 110px 0 0 0;
     }
+    
+    .weather__icon{
+        max-width: 148px;
+    }
     .weather__temp{
+        margin: 20px 0 0 0;
         font-size: 48px;
         font-weight: 600;
         min-width: 346px;
@@ -36,5 +54,6 @@ export default {
         font-size: 20px;
         font-weight: 600;
         min-width: 346px;
+        margin: 10px 0;
     }
 </style>

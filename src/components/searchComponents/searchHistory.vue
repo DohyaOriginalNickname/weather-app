@@ -41,7 +41,7 @@ export default {
     }
 
     .history__text{
-        width: 172px;
+        min-width: 171px;
         height: 24px;
     }
 
@@ -49,6 +49,7 @@ export default {
         width: 171px;
         text-align: right;
         color: #47B1E6;
+        cursor: pointer;
     }
 
     .search-log{

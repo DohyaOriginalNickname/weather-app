@@ -3,7 +3,7 @@
         <div 
             v-for="city in arrayCities" 
             :key="city.id"
-            @click="$store.dispatch('addToHistory',city)"
+            @click="toTheStore(city)"
         >
             <div class="country">
                 <div class="country__text">{{city.country}}</div>
@@ -32,6 +32,13 @@ export default {
             type: Array
         }
     },
+    methods: {
+        toTheStore(city){
+            this.$store.dispatch('addToHistory',city)
+            this.$store.commit('changeCity', city)
+            this.$router.push('/')
+        }
+    }
 }
 </script>
 

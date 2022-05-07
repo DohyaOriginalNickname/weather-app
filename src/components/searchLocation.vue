@@ -20,7 +20,7 @@
             </div>
             <div v-else>
                 <div v-if=" searchCity === '' ">
-                    <p v-if="historyCities === null || historyCities.lenght === 0" class="something">Введите название города</p>
+                    <p v-if="historyCities.length === 0" class="something">Введите название города</p>
                     <div v-else>
                         <search-history :historyCities = "historyCities" ></search-history>
                     </div>
@@ -62,14 +62,14 @@ export default {
             })
         },
         historyCities(){
-            return this.$store.state.searchHistory
+            return this.$store.state.history.searchHistory
         }
     },
     methods:{
         blur(){
             setTimeout(()=>{
                 this.touch = false
-            }, 50)
+            }, 80)
         }
     },
     created(){

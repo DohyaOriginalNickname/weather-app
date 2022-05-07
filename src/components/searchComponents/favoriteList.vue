@@ -17,15 +17,14 @@
             </div>
             <div>
                 <img 
-                    src="@/assets/BlueStar.png" 
-                    @click.prevent="log.delete = true" 
-                    @click="DeleteCity"
+                    src="@/assets/Stars/BlueStar.png" 
                     class="favorite-list__star"
+                    @click = "DeleteCity(log)"
                 >
             </div>
         </div>
         
-        <snackbar></snackbar>
+        <snackbar>Локация удалена</snackbar>
     </div>
     <div v-else class="something">
         <p>У вас нету избранных городов</p>
@@ -33,7 +32,7 @@
 </template>
 
 <script>
-import snackbar from './snackbar.vue'
+import snackbar from '../UI/snackbar.vue'
 export default {
     components: { snackbar },
     props:{
@@ -43,21 +42,29 @@ export default {
     },
     data(){
         return{
-            cities:[
-                {city:'Астана',weather:'Переменная облачность',temp:'+7° С', id: '1',},
-                {city:'Нидерланды',weather:'Гроза',temp:'+15° С', id:'2',},
-                {city:'Будапешт',weather:'Гроза',temp:'+11° С', id:'3',},
-            ]
+            favoriteCities:[]
+        }
+    },
+    computed: {
+        cities(){
+            return this.$store.state.favorite.favoriteCities
         }
     },
     methods:{
-        DeleteCity(){
-            this.cities = this.cities.filter(del => del.delete === this.cities.delete)
+        DeleteCity(log){
+            for (let i = 0; i < this.cities.length; i++) {
+                if (this.cities[i] === log) {
+                    this.cities[i].delete = true
+                    this.$store.dispatch('deleteFavoriteCity', this.cities)
+                    break
+                }
+            }
             const x = document.getElementById('snackbar')
             x.className = 'show'
             setTimeout(()=>{ x.className = x.className.replace("show", "") }, 2000)
-        }
+        },
     },
+    
 }
 </script>
 
