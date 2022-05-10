@@ -1,11 +1,13 @@
 <template>
     <div class="weather">
         <div >
-            <img src="@/assets/weather-icon/Union.png" alt="" class="weather__icon">
+            <img src="@/assets/weather-icon/Union.png" class="weather__icon">
         </div>
-
-        <div class="weather__temp">
-            <h1>{{temp}}</h1> 
+        
+        <div class="weather__temp" >
+            <h1 v-if="parseInt(temp) > 0">+{{temp}}</h1>
+            <h1 v-else-if="parseInt(temp) < 0">-{{temp}}</h1> 
+            <h1 v-else>{{temp}}</h1>  
         </div>
 
         <div class="weather__description">
@@ -18,17 +20,13 @@
 export default {
     props:{
         temp:{
-            type: String,
+            type: String || Number,
             default: '-'
         },
         description:{
             type: String,
             default: '-'
         },
-        image:{
-            type: String,
-            default: '@/assets/weather-icon/Union.png'
-        }
     }
 }
 </script>

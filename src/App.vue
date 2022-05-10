@@ -6,7 +6,10 @@
 
 <script>
 export default {
-  
+  created(){
+    this.$store.dispatch('getHistory')
+    this.$store.dispatch('getFavoriteCity')
+  }
 }
 </script>
 

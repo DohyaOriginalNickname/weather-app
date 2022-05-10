@@ -4,7 +4,7 @@
             <div class="history__text">История поиска</div>
             <div class="history__clear" @click="$store.dispatch('deleteHistory')">Очистить</div>
         </div>
-        <div class="search-log border" v-for="log in historyCities" :key="log">
+        <div class="search-log border" v-for="log in historyCities" :key="log" @click="toTheStore(log)">
             <div>
                 <img src="@/assets/weather-icon/SunCloudy.png" class="search-list__image">
             </div>
@@ -21,7 +21,9 @@
 </template>
 
 <script>
+import toTheStore from '@/mixins/toTheStore.js'
 export default {
+    mixins: [toTheStore],
     props: {
         historyCities:{
             type: Array

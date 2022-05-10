@@ -4,54 +4,32 @@
             <div class="info__other">
                 <div class="flex">
                     <img src="@/assets/wind.png" alt="">
-                    <p class="info__other_text">{{11}}км/ч</p>
+                    <p class="info__other_text">{{wind}} км/ч</p>
                 </div>
                 <div class="flex">
                     <img src="@/assets/humidity.png" alt="">
-                    <p class="info__other_text">54%</p>
+                    <p class="info__other_text">{{humidity}}%</p>
                 </div>
             </div>
             <div class="info__main">
                 <div class="info__text">
                     <div class="info__date">
-                        <p>dadfsdfsdf</p>
+                        <p>Сегодня</p>
                     </div>
                     <div class="info__temp">
-                        <p>fsdfsd</p>
+                        <p>{{Math.ceil(tempMax)}} / {{Math.ceil(tempMin)}}° С</p>
                     </div>
                 </div>
                 <div class="info__data">
                     <div class="info-hour">
                         <div class="info-hour__text" style="font-weight: 600;">
-                            <p>fsdfsd</p>
+                            <p>Temp</p>
                         </div>
                         <div>
                             <img src="@/assets/weather-icon/SunCloudy.png" class="info-hour__img">
                         </div>
                         <div class="info-hour__text">
-                            <p>fsdfsd</p>
-                        </div>
-                    </div>
-                    <div class="info-hour">
-                        <div class="info-hour__text" style="font-weight: 600;">
-                            <p>fsdfsd</p>
-                        </div>
-                        <div>
-                            <img src="@/assets/weather-icon/SunCloudy.png" class="info-hour__img">
-                        </div>
-                        <div class="info-hour__text">
-                            <p>fsdfsd</p>
-                        </div>
-                    </div>
-                    <div class="info-hour">
-                        <div class="info-hour__text" style="font-weight: 600;">
-                            <p>fsdfsd</p>
-                        </div>
-                        <div>
-                            <img src="@/assets/weather-icon/SunCloudy.png" class="info-hour__img">
-                        </div>
-                        <div class="info-hour__text">
-                            <p>fsdfsd</p>
+                            <p>Hour</p>
                         </div>
                     </div>
                 </div>
@@ -62,7 +40,20 @@
 
 <script>
 export default {
-    
+    props: {
+        humidity:{
+            type: Number
+        },
+        wind:{
+            type: Number
+        },
+        tempMax:{
+            type: Number
+        },
+        tempMin:{
+            type: Number
+        }
+    }
 }
 </script>
 

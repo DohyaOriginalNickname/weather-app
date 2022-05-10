@@ -1,6 +1,6 @@
 <template>
-    <div v-if="favorite === true">
-        <div class="favorite-list border" v-for="log in cities" :key="log.id">
+    <div v-if="cities.length !== 0 ">
+        <div class="favorite-list border" v-for="log in cities" :key="log.id" @click="toTheStore(log)">
             <div>
                 <img src="@/assets/weather-icon/SunCloudy.png" class="favorite-list__image">
             </div>
@@ -12,7 +12,7 @@
                     <p>{{log.weather}}</p>
                 </div>
                 <div>
-                    <p>{{log.temp}}</p>
+                    <p>{{log.feelsLike}}° С</p>
                 </div>
             </div>
             <div>
@@ -33,18 +33,10 @@
 
 <script>
 import snackbar from '../UI/snackbar.vue'
+import toTheStore from '@/mixins/toTheStore.js'
 export default {
     components: { snackbar },
-    props:{
-        favorite:{
-            type: Boolean
-        }
-    },
-    data(){
-        return{
-            favoriteCities:[]
-        }
-    },
+    mixins: [toTheStore],
     computed: {
         cities(){
             return this.$store.state.favorite.favoriteCities
@@ -54,7 +46,7 @@ export default {
         DeleteCity(log){
             for (let i = 0; i < this.cities.length; i++) {
                 if (this.cities[i] === log) {
-                    this.cities[i].delete = true
+                    this.cities[i].favorite = false
                     this.$store.dispatch('deleteFavoriteCity', this.cities)
                     break
                 }

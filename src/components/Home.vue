@@ -10,23 +10,31 @@
                 :nameCity="city.city"
                 @click="$router.push('/search')"
             ></geolocation-info>
-            <div v-if="city.city !== 'Город не определен'" class="star">
+            <div v-if="city.city || city.favorite === false" class="star">
                 <img src="@/assets/Stars/EmptyStar.png" @click="addToFavoriteCity()">
+            </div>
+            <div v-if="city.favorite" class="star">
+                <img src="@/assets/Stars/WhiteStar.png">
             </div>
         </div>
         
-        <weather-info :temp="city.temp" :description="city.weather"></weather-info>
+        <weather-info :temp="city.feelsLike" :description="city.weather"></weather-info>
 
         <div>
             <div 
                 class="choice-locaton" 
                 @click="$router.push('/search')" 
-                v-if="city.city === 'Город не определен'"
+                v-if="!city.city"
             >
                 <button class="choice-location__button">Выбрать локацию</button>
             </div>
             <div v-else>
-                <today-info></today-info>
+                <today-info 
+                    :humidity="city.humidity" 
+                    :wind="city.wind" 
+                    :tempMax="city.tempMax" 
+                    :tempMin="city.tempMin"
+                ></today-info>
             </div>
         </div>
         
@@ -43,7 +51,7 @@ import snackbar from './UI/snackbar.vue'
 export default {
     data(){
         return{
-            addFavorite: true
+            addFavorite: true,
         }
     },
     components:{
@@ -59,11 +67,13 @@ export default {
     },
     methods: {
         addToFavoriteCity(){
+            this.city.favorite = true
             this.$store.commit('addFavoriteCity', this.city)
+
             const x = document.getElementById('snackbar')
             x.className = 'show'
             setTimeout(()=>{ x.className = x.className.replace("show", "") }, 2000)
-        }
+        },
     }
 }
 </script>

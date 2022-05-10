@@ -17,7 +17,7 @@
                         <p>{{city.city}}</p>
                     </div>
                     <div class="search-log__temp">
-                        <p>{{city.temp}}</p>
+                        <p>{{city.tempMax}}°/{{city.tempMin}}</p>
                     </div>
                 </div>
             </div>
@@ -26,6 +26,7 @@
 </template>
 
 <script>
+
 export default {
     props:{
         arrayCities:{

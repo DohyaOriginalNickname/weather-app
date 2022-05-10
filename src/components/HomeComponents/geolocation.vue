@@ -13,7 +13,8 @@
 export default {
     props:{
         nameCity:{
-            type: String
+            type: String,
+            default: 'Город не определен'
         },
     }
 }

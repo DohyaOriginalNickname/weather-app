@@ -16,7 +16,7 @@
         </div>
         <div :class="{ antisomething: touch === false}">
             <div v-if="touch === false">
-                <favorite-list :favorite="favorite"></favorite-list>
+                <favorite-list></favorite-list>
             </div>
             <div v-else>
                 <div v-if=" searchCity === '' ">
@@ -41,12 +41,7 @@ export default {
     data(){
         return{
             touch: false,
-            favorite: true,
-            arrayCities: [
-                {country:'Казахстан',city:'Астана',weather:'Переменная облачность',temp:'+7° С', id: '1',},
-                {country:'Нидерланды', city:'Амстердам',weather:'Гроза',temp:'+15° С', id:'2',},
-                {country:'Венгрия', city:'Будапешт',weather:'Гроза',temp:'+11° С', id:'3',},
-            ],
+            arrayCities: [],
             searchCity: ''
         }
     },
@@ -63,18 +58,20 @@ export default {
         },
         historyCities(){
             return this.$store.state.history.searchHistory
-        }
+        },
     },
     methods:{
         blur(){
+            if(this.searchCity !== ''){
+                this.$store.dispatch('fetchWeather', this.searchCity)
+            }
+            
             setTimeout(()=>{
                 this.touch = false
-            }, 80)
+            }, 100)
         }
     },
-    created(){
-        this.$store.dispatch('getHistory')
-    }
+    
 }
 </script>
 
