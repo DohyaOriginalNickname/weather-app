@@ -18,7 +18,7 @@
             </div>
         </div>
         
-        <weather-info :temp="city.feelsLike" :description="city.weather"></weather-info>
+        <weather-info :temp="city.temp" :description="city.weather"></weather-info>
 
         <div>
             <div 
@@ -30,10 +30,7 @@
             </div>
             <div v-else>
                 <today-info 
-                    :humidity="city.humidity" 
-                    :wind="city.wind" 
-                    :tempMax="city.tempMax" 
-                    :tempMin="city.tempMin"
+                    :city="city"
                 ></today-info>
             </div>
         </div>

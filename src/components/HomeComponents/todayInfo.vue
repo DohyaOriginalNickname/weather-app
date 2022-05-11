@@ -4,11 +4,11 @@
             <div class="info__other">
                 <div class="flex">
                     <img src="@/assets/wind.png" alt="">
-                    <p class="info__other_text">{{wind}} км/ч</p>
+                    <p class="info__other_text">{{city.wind}} км/ч</p>
                 </div>
                 <div class="flex">
                     <img src="@/assets/humidity.png" alt="">
-                    <p class="info__other_text">{{humidity}}%</p>
+                    <p class="info__other_text">{{city.humidity}}%</p>
                 </div>
             </div>
             <div class="info__main">
@@ -17,19 +17,21 @@
                         <p>Сегодня</p>
                     </div>
                     <div class="info__temp">
-                        <p>{{Math.ceil(tempMax)}} / {{Math.ceil(tempMin)}}° С</p>
+                        <p>{{Math.ceil(city.tempMax)}} / {{Math.ceil(city.tempMin)}}° С</p>
                     </div>
                 </div>
                 <div class="info__data">
-                    <div class="info-hour">
-                        <div class="info-hour__text" style="font-weight: 600;">
-                            <p>Temp</p>
-                        </div>
-                        <div>
-                            <img src="@/assets/weather-icon/SunCloudy.png" class="info-hour__img">
-                        </div>
-                        <div class="info-hour__text">
-                            <p>Hour</p>
+                    <div v-for="hour in city.dayHours" :key="hour">
+                        <div class="info-hour">
+                            <div class="info-hour__text" style="font-weight: 600;">
+                                <p>{{hour.temp_c}}</p>
+                            </div>
+                            <div>
+                                <img src="@/assets/weather-icon/SunCloudy.png" class="info-hour__img">
+                            </div>
+                            <div class="info-hour__text">
+                                <p>{{hour.time.slice(11)}}</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -41,17 +43,8 @@
 <script>
 export default {
     props: {
-        humidity:{
-            type: Number
-        },
-        wind:{
-            type: Number
-        },
-        tempMax:{
-            type: Number
-        },
-        tempMin:{
-            type: Number
+        city:{
+            type: Object
         }
     }
 }
@@ -62,7 +55,7 @@ export default {
         color: white;
         display: flex;
         justify-content: space-between;
-        width: 93%;
+        min-width: 95%;
         height: 24px;
         position: absolute;
         left: 16px;
@@ -107,7 +100,9 @@ export default {
     }
     .info__data{
         display: flex;
-        justify-content: space-around;
+        justify-content: space-between;
+        gap: 16px;
+        overflow-x: scroll;
     }
     .info-hour{
         width: 64px;

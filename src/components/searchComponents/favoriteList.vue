@@ -12,7 +12,7 @@
                     <p>{{log.weather}}</p>
                 </div>
                 <div>
-                    <p>{{log.feelsLike}}° С</p>
+                    <p>{{log.temp}}° С</p>
                 </div>
             </div>
             <div>
@@ -56,7 +56,6 @@ export default {
             setTimeout(()=>{ x.className = x.className.replace("show", "") }, 2000)
         },
     },
-    
 }
 </script>
 

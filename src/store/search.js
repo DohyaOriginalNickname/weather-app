@@ -1,12 +1,13 @@
 class City{
-    constructor(city, weather, feelsLike, tempMin, tempMax, humidity, wind){
+    constructor(city, weather, temp, tempMin, tempMax, humidity, wind, dayHours){
         this.city = city
         this.weather = weather
-        this.feelsLike = feelsLike
+        this.temp = temp
         this.tempMin = tempMin
         this.tempMax = tempMax
         this.humidity = humidity
         this.wind = wind
+        this.dayHours = dayHours
     }
 }
 
@@ -21,10 +22,20 @@ export const search = {
     },
     actions: {
         async fetchWeather({commit},city){
-            const server = `https://api.openweathermap.org/data/2.5/weather?units=metric&q=${city}&appid=1b19670bcebb72cc96a217a763f017e3`
+            const server = `https://api.weatherapi.com/v1/forecast.json?key=55ef9d4e33a64c75afb55229221105&q=${city}&days=1&aqi=yes&alerts=no`
             const response = await fetch(server,{method: 'GET'})
             const responseResult = await response.json()
-            commit('changeCity', new City(city, responseResult.weather[0].main, responseResult.main.feels_like, responseResult.main.temp_min, responseResult.main.temp_max, responseResult.main.humidity, responseResult.wind.speed ))
-        }
+            console.log(responseResult)
+            commit('changeCity', new City(
+                responseResult.location.name,
+                responseResult.current.condition.text,
+                responseResult.current.temp_c,
+                responseResult.forecast.forecastday[0].day.mintemp_c,
+                responseResult.forecast.forecastday[0].day.maxtemp_c,
+                responseResult.current.humidity,
+                responseResult.current.wind_kph,
+                responseResult.forecast.forecastday[0].hour
+            ))
+        },
     }
 }
