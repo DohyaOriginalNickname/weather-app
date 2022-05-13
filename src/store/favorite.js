@@ -16,6 +16,10 @@ export const favorite = {
         },
         getFavoriteCity(state, payload){
             state.favoriteCities = JSON.parse(payload)
+        },
+        updateFavoriteCity(state,payload){
+            state.favoriteCities = payload
+            localStorage.setItem('favoriteList', JSON.stringify(state.favoriteCities))
         }
     },
     actions: {

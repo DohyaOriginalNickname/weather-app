@@ -26,9 +26,14 @@
                     </div>
                 </div>
                 <div v-else>
-                    <search-city :arrayCities = "filtredCity"></search-city>
+                    <search-city :searchCity="searchCity"></search-city>
                 </div>
             </div>
+        </div>
+
+
+        <div id="loader" v-if="loading === true">
+            <img src="@/assets/Vp3R.gif" alt="">
         </div>
     </div>
 </template>
@@ -41,7 +46,6 @@ export default {
     data(){
         return{
             touch: false,
-            arrayCities: [],
             searchCity: ''
         }
     },
@@ -59,6 +63,9 @@ export default {
         historyCities(){
             return this.$store.state.history.searchHistory
         },
+        loading(){
+            return this.$store.getters.loading
+        }
     },
     methods:{
         blur(){
@@ -68,10 +75,10 @@ export default {
             
             setTimeout(()=>{
                 this.touch = false
-            }, 100)
+                this.$router.push('/')
+            }, 200)
         }
     },
-    
 }
 </script>
 
@@ -114,4 +121,27 @@ export default {
     .antisomething{
         top: 108px;
     }
+
+    #loader{
+        position: absolute;
+        width: 375px;
+        height: 667px;
+        left: 0px;
+        top: 0px;
+
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(8px);
+    }
+    #loader img {
+		width: 36px;
+        height: 36px;
+		text-align: center;
+		position: fixed;
+		z-index: 999;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		margin: auto
+	}
 </style>

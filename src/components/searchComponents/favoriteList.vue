@@ -19,7 +19,7 @@
                 <img 
                     src="@/assets/Stars/BlueStar.png" 
                     class="favorite-list__star"
-                    @click = "DeleteCity(log)"
+                    @click.stop = "DeleteCity(log)"
                 >
             </div>
         </div>
@@ -56,6 +56,9 @@ export default {
             setTimeout(()=>{ x.className = x.className.replace("show", "") }, 2000)
         },
     },
+    created(){
+        this.$store.dispatch('updateWeather', JSON.parse(localStorage.getItem('favoriteList')))
+    }
 }
 </script>
 

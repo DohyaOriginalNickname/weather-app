@@ -1,8 +1,6 @@
 <template>
     <div>
         <div 
-            v-for="city in arrayCities" 
-            :key="city.id"
             @click="toTheStore(city)"
         >
             <div class="country">
@@ -17,7 +15,7 @@
                         <p>{{city.city}}</p>
                     </div>
                     <div class="search-log__temp">
-                        <p>{{city.tempMax}}°/{{city.tempMin}}</p>
+                        <p>{{city.tempMax}}°/{{city.tempMin}}°</p>
                     </div>
                 </div>
             </div>
@@ -28,9 +26,9 @@
 <script>
 
 export default {
-    props:{
-        arrayCities:{
-            type: Array
+    computed:{
+        city(){
+            return this.$store.state.search.city
         }
     },
     methods: {

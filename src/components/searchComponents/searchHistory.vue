@@ -13,7 +13,9 @@
                     <p>{{log.city}}</p>
                 </div>
                 <div class="search-log__temp">
-                    <p>{{log.temp}}</p>
+                    <p>
+                        <a>{{Math.ceil(log.tempMax)}}°</a> / <a>{{Math.ceil(log.tempMin)}}°</a>
+                    </p>
                 </div>
             </div>
         </div>
