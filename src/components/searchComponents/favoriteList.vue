@@ -29,6 +29,7 @@
     <div v-else class="something">
         <p>У вас нету избранных городов</p>
     </div>
+
 </template>
 
 <script>
@@ -88,7 +89,10 @@ export default {
         },
     },
     created(){
-        this.$store.dispatch('updateWeather', JSON.parse(localStorage.getItem('favoriteList')))
+        if(JSON.parse(localStorage.getItem('favoriteList')) !== null){
+            this.$store.dispatch('updateWeather', JSON.parse(localStorage.getItem('favoriteList')))
+        }
+        
     }
 }
 </script>

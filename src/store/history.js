@@ -9,7 +9,12 @@ export const history = {
             state.searchHistory.push(payload)
         },
         getHistory(state, payload){
-            state.searchHistory = JSON.parse(payload)
+            if(payload === null){
+                state.searchHistory = []
+                localStorage.setItem('history', JSON.stringify(state.searchHistory))
+            }else{
+                state.searchHistory = JSON.parse(payload)
+            }
         },
         deleteHistory(state){
             state.searchHistory = []
