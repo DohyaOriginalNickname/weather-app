@@ -26,12 +26,10 @@
 import toTheStore from '@/mixins/toTheStore.js'
 export default {
     mixins: [toTheStore],
-    props: {
-        historyCities:{
-            type: Array
-        }
-    },
     computed:{
+        historyCities(){
+            return this.$store.state.history.searchHistory
+        },
         dayHours(){
             const dayHours = []
             for (let i = 0; i < this.historyCities.length; i++) {
@@ -63,6 +61,9 @@ export default {
             }
             return dayHours
         }
+    },
+    created(){
+        this.$store.dispatch('updateHistoryCities', JSON.parse(localStorage.getItem('history')))
     }
 }
 </script>

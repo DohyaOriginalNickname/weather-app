@@ -23,7 +23,7 @@
                 <div v-if=" searchCity === '' ">
                     <p v-if="historyCities.length === 0" class="something">Введите название города</p>
                     <div v-else>
-                        <search-history :historyCities = "historyCities" ></search-history>
+                        <search-history></search-history>
                     </div>
                 </div>
                 <div v-else>
@@ -56,11 +56,6 @@ export default {
         SearchCity
     },
     computed:{
-        filtredCity(){
-            return this.arrayCities.filter(name => {
-                return name.city.toLowerCase().indexOf(this.searchCity.toLowerCase()) !== -1
-            })
-        },
         historyCities(){
             return this.$store.state.history.searchHistory
         },

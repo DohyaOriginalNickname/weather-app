@@ -75,10 +75,10 @@ export default {
     },
     methods:{
         DeleteCity(log){
-            for (let i = 0; i < this.cities.length; i++) {
-                if (this.cities[i] === log) {
-                    this.cities[i].favorite = false
-                    this.$store.dispatch('deleteFavoriteCity', this.cities)
+            for (let i = 0; i < this.dayHours.length; i++) {
+                if (this.dayHours[i] === log) {
+                    this.dayHours[i].favorite = false
+                    this.$store.dispatch('deleteFavoriteCity', this.dayHours)
                     break
                 }
             }

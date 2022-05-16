@@ -58,9 +58,28 @@ export const search = {
                 ))
                 updateCities[i].favorite = true
             }
-            commit('updateHistory', updateCities)
             commit('updateFavoriteCity',updateCities)
             commit('setLoading', false)
         },
+        async updateHistoryCities({commit},payload){
+            const updateHistoryCities = []
+            for(let i = 0; i<payload.length; i++){
+                const server = `https://api.weatherapi.com/v1/forecast.json?key=55ef9d4e33a64c75afb55229221105&q=${payload[i].city}&days=1&aqi=yes&alerts=no`
+                const response = await fetch(server,{method: 'GET'})
+                const responseResult = await response.json()
+                updateHistoryCities.push(new City(
+                    responseResult.location.country,
+                    responseResult.location.name,
+                    responseResult.current.condition.text,
+                    responseResult.current.temp_c,
+                    responseResult.forecast.forecastday[0].day.mintemp_c,
+                    responseResult.forecast.forecastday[0].day.maxtemp_c,
+                    responseResult.current.humidity,
+                    responseResult.current.wind_kph,
+                    responseResult.forecast.forecastday[0].hour
+                ))
+            }
+            commit('updateHistory', updateHistoryCities)
+        }
     }
 }
