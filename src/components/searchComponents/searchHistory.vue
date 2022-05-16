@@ -4,9 +4,9 @@
             <div class="history__text">История поиска</div>
             <div class="history__clear" @click="$store.dispatch('deleteHistory')">Очистить</div>
         </div>
-        <div class="search-log border" v-for="log in historyCities" :key="log" @click="toTheStore(log)">
+        <div class="search-log border" v-for="log in dayHours" :key="log" @click="toTheStore(log)">
             <div>
-                <img src="@/assets/weather-icon/SunCloudy.png" class="search-list__image">
+                <img :src="log.img" class="search-list__image">
             </div>
             <div style="display:flex;">
                 <div class="search-log__city">
@@ -31,6 +31,39 @@ export default {
             type: Array
         }
     },
+    computed:{
+        dayHours(){
+            const dayHours = []
+            for (let i = 0; i < this.historyCities.length; i++) {
+                let data = {
+                    ...this.historyCities[i],
+                    img: '',
+                }
+                switch (this.historyCities[i].weather) {
+                    case 'Partly cloudy':
+                        data.img = require('@/assets/weather-icon/SunCloudy.png')
+                        break;
+                    case 'Sunny':
+                        data.img = require('@/assets/weather-icon/Sun.png')
+                        break;
+                    case 'Cloudy','Overcast','Mist':
+                        data.img = require('@/assets/weather-icon/Union.png')
+                        break;
+                    case 'Moderate rain','Light rain shower','Light rain','Light drizzle':
+                        data.img = require('@/assets/weather-icon/Rain.png')
+                        break;
+                    case 'Thunder':
+                        data.img = require('@/assets/weather-icon/Thunder.png')
+                        break;
+                    default:
+                        data.img = require('@/assets/weather-icon/Union.png')
+                        break;
+                }
+                dayHours.push(data)
+            }
+            return dayHours
+        }
+    }
 }
 </script>
 

@@ -1,8 +1,8 @@
 <template>
     <div v-if="cities.length !== 0 ">
-        <div class="favorite-list border" v-for="log in cities" :key="log.id" @click="toTheStore(log)">
+        <div class="favorite-list border" v-for="log in dayHours" :key="log.id" @click="toTheStore(log)">
             <div>
-                <img src="@/assets/weather-icon/SunCloudy.png" class="favorite-list__image">
+                <img :src="log.img" class="favorite-list__image">
             </div>
             <div class="favorite-list__info">
                 <div>
@@ -40,6 +40,37 @@ export default {
     computed: {
         cities(){
             return this.$store.state.favorite.favoriteCities
+        },
+        dayHours(){
+            const dayHours = []
+            for (let i = 0; i < this.cities.length; i++) {
+                let data = {
+                    ...this.cities[i],
+                    img: '',
+                }
+                switch (this.cities[i].weather) {
+                    case 'Partly cloudy':
+                        data.img = require('@/assets/weather-icon/SunCloudy.png')
+                        break;
+                    case 'Sunny':
+                        data.img = require('@/assets/weather-icon/Sun.png')
+                        break;
+                    case 'Cloudy','Overcast','Mist':
+                        data.img = require('@/assets/weather-icon/Union.png')
+                        break;
+                    case 'Moderate rain','Light rain shower','Light rain','Light drizzle':
+                        data.img = require('@/assets/weather-icon/Rain.png')
+                        break;
+                    case 'Thunder':
+                        data.img = require('@/assets/weather-icon/Thunder.png')
+                        break;
+                    default:
+                        data.img = require('@/assets/weather-icon/Union.png')
+                        break;
+                }
+                dayHours.push(data)
+            }
+            return dayHours
         }
     },
     methods:{

@@ -10,6 +10,7 @@
                 class="search__input" 
                 @focus="touch = true" 
                 @blur="blur()"
+                @input="input()"
                 v-model="searchCity"
             >
             <img src="@/assets/focus.png" alt="" class="search__target">
@@ -69,14 +70,14 @@ export default {
     },
     methods:{
         blur(){
+            setTimeout(()=>{
+                this.touch = false
+            }, 200)
+        },
+        input(){
             if(this.searchCity !== ''){
                 this.$store.dispatch('fetchWeather', this.searchCity)
             }
-            
-            setTimeout(()=>{
-                this.touch = false
-                this.$router.push('/')
-            }, 200)
         }
     },
 }
@@ -124,7 +125,7 @@ export default {
 
     #loader{
         position: absolute;
-        width: 375px;
+        width: 100%;
         height: 667px;
         left: 0px;
         top: 0px;

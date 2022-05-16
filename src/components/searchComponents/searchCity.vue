@@ -4,11 +4,13 @@
             @click="toTheStore(city)"
         >
             <div class="country">
-                <div class="country__text">{{city.country}}</div>
+                <!--The API translates "Iran" as "I ran" for some reason...-->
+                <div class="country__text" v-if="city.country === 'Я побежал'">Иран</div> 
+                <div class="country__text" v-else>{{city.country}}</div>
             </div>
             <div class="search-log border" >
                 <div>
-                    <img src="@/assets/weather-icon/SunCloudy.png" class="search-list__image">
+                    <img :src="getImg" class="search-list__image">
                 </div>
                 <div style="display:flex;">
                     <div class="search-log__city">
@@ -24,8 +26,9 @@
 </template>
 
 <script>
-
+import getImg from '@/mixins/getImg'
 export default {
+    mixins:[getImg],
     computed:{
         city(){
             return this.$store.state.search.city
@@ -37,7 +40,7 @@ export default {
             this.$store.commit('changeCity', city)
             this.$router.push('/')
         }
-    }
+    },
 }
 </script>
 

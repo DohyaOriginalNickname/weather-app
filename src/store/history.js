@@ -13,6 +13,10 @@ export const history = {
         },
         deleteHistory(state){
             state.searchHistory = []
+        },
+        updateHistory({state},payload){
+            state.searchHistory = payload
+            localStorage.setItem('history', JSON.stringify(state.searchHistory))
         }
     },
     actions: {

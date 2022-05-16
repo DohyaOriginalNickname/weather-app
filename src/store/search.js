@@ -23,12 +23,9 @@ export const search = {
     },
     actions: {
         async fetchWeather({commit},city){
-            commit('setLoading', true)
             const server = `https://api.weatherapi.com/v1/forecast.json?key=55ef9d4e33a64c75afb55229221105&q=${city}&days=1&aqi=yes&alerts=no`
             const response = await fetch(server,{method: 'GET'})
             const responseResult = await response.json()
-            console.log(responseResult)
-            commit('setLoading', false)
             commit('changeCity', new City(
                 responseResult.location.country,
                 responseResult.location.name,
@@ -39,11 +36,12 @@ export const search = {
                 responseResult.current.humidity,
                 responseResult.current.wind_kph,
                 responseResult.forecast.forecastday[0].hour,
-            ))
+            )) 
         },
         async updateWeather({commit}, payload){
             const updateCities = []
             for(let i = 0; i<payload.length; i++){
+                commit('setLoading', true)
                 const server = `https://api.weatherapi.com/v1/forecast.json?key=55ef9d4e33a64c75afb55229221105&q=${payload[i].city}&days=1&aqi=yes&alerts=no`
                 const response = await fetch(server,{method: 'GET'})
                 const responseResult = await response.json()
@@ -60,7 +58,9 @@ export const search = {
                 ))
                 updateCities[i].favorite = true
             }
+            commit('updateHistory', updateCities)
             commit('updateFavoriteCity',updateCities)
+            commit('setLoading', false)
         },
     }
 }

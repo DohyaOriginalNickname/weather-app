@@ -21,16 +21,16 @@
                     </div>
                 </div>
                 <div class="info__data">
-                    <div v-for="hour in city.dayHours" :key="hour">
+                    <div v-for="hour in dayHours" :key="hour">
                         <div class="info-hour">
                             <div class="info-hour__text" style="font-weight: 600;">
-                                <p>{{hour.temp_c}}</p>
+                                <p>{{hour.temp}}</p>
                             </div>
                             <div>
-                                <img src="@/assets/weather-icon/SunCloudy.png" class="info-hour__img">
+                                <img :src="hour.img" class="info-hour__img">
                             </div>
                             <div class="info-hour__text">
-                                <p>{{hour.time.slice(11)}}</p>
+                                <p>{{hour.time}}</p>
                             </div>
                         </div>
                     </div>
@@ -45,6 +45,40 @@ export default {
     props: {
         city:{
             type: Object
+        }
+    },
+    computed: {
+        dayHours(){
+            const dayHours = []
+            for (let i = 0; i < this.city.dayHours.length; i++) {
+                let data = {
+                    temp: this.city.dayHours[i].temp_c, 
+                    img: '', 
+                    time: this.city.dayHours[i].time.slice(11)
+                }
+                switch (this.city.dayHours[i].condition.text) {
+                    case 'Partly cloudy':
+                        data.img = require('@/assets/weather-icon/SunCloudy.png')
+                        break;
+                    case 'Sunny':
+                        data.img = require('@/assets/weather-icon/Sun.png')
+                        break;
+                    case 'Cloudy','Overcast','Mist':
+                        data.img = require('@/assets/weather-icon/Union.png')
+                        break;
+                    case 'Moderate rain','Light rain shower','Light rain','Light drizzle':
+                        data.img = require('@/assets/weather-icon/Rain.png')
+                        break;
+                    case 'Thunder':
+                        data.img = require('@/assets/weather-icon/Thunder.png')
+                        break;
+                    default:
+                        data.img = require('@/assets/weather-icon/Union.png')
+                        break;
+                }
+                dayHours.push(data)
+            }
+            return dayHours
         }
     }
 }

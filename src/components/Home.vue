@@ -45,12 +45,15 @@ import Weather from './HomeComponents/weather.vue'
 import GeoLoc from './HomeComponents/geolocation.vue'
 import TodayInfo from './HomeComponents/todayInfo.vue'
 import snackbar from './UI/snackbar.vue'
+
+import getImg from '../mixins/getImg'
 export default {
     data(){
         return{
             addFavorite: true,
         }
     },
+    mixins:[getImg],
     components:{
         weatherInfo: Weather,
         geolocationInfo: GeoLoc,
@@ -60,39 +63,6 @@ export default {
     computed: {
         city(){
             return this.$store.state.search.city
-        },
-        getImg(){
-            let imagine= ''
-            switch (this.city.weather) {
-                case 'Partly cloudy':
-                    imagine = require('@/assets/weather-icon/SunCloudy.png')
-                    break;
-                case 'Sunny':
-                    imagine = require('@/assets/weather-icon/Sun.png')
-                    break;
-                case 'Cloudy':
-                    imagine = require('@/assets/weather-icon/Union.png')
-                    break;
-                case 'Overcast':
-                    imagine = require('@/assets/weather-icon/Union.png')
-                    break;
-                case 'Moderate rain':
-                    imagine = require('@/assets/weather-icon/Rain.png')
-                    break;
-                case 'Light rain':
-                    imagine = require('@/assets/weather-icon/Rain.png')
-                    break;
-                case 'Light rain shower':
-                    imagine = require('@/assets/weather-icon/Rain.png')
-                    break;
-                case 'Thunder':
-                    imagine = require('@/assets/weather-icon/Thunder.png')
-                    break;
-                case 'Mist':
-                    imagine = require('@/assets/weather-icon/Union.png')
-                    break;
-            }
-            return imagine;
         }
     },
     methods: {
