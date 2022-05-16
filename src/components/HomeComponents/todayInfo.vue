@@ -14,7 +14,7 @@
             <div class="info__main">
                 <div class="info__text">
                     <div class="info__date">
-                        <p>Сегодня</p>
+                        <p>Сегодня {{todayDate}}</p>
                     </div>
                     <div class="info__temp">
                         <p>{{Math.ceil(city.tempMax)}} / {{Math.ceil(city.tempMin)}}° С</p>
@@ -79,6 +79,30 @@ export default {
                 dayHours.push(data)
             }
             return dayHours
+        },
+        todayDate(){
+            const mounths = {
+                '01':'янв',
+                '02': 'фев',
+                '03':'марта',
+                '04':'апр',
+                '05':'мая',
+                '06':'июня',
+                '07':'июля',
+                '08':'авг',
+                '09':'сен',
+                '10':'окт',
+                '11':'нояб',
+                '12':'дек'
+            }
+            console.log(Object.values(mounths)[0])
+            let todayDate
+            for (let i = 0; i <Object.keys(mounths).length; i++) {
+                if(Object.keys(mounths)[i] === this.city.dayHours[0].time.slice(5,7)){
+                    todayDate = `${this.city.dayHours[0].time.slice(8,11)} ${Object.values(mounths)[i]}`
+                }
+            }
+            return todayDate
         }
     }
 }

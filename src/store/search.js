@@ -78,6 +78,9 @@ export const search = {
                     responseResult.current.wind_kph,
                     responseResult.forecast.forecastday[0].hour
                 ))
+                if (updateHistoryCities[i].city === JSON.parse(localStorage.getItem('favoriteList'))[i].city) {
+                    updateHistoryCities[i].favorite = true
+                }
             }
             commit('updateHistory', updateHistoryCities)
         }
