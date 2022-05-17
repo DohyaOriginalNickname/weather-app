@@ -9,11 +9,11 @@
                 placeholder="Поиск локации" 
                 class="search__input" 
                 @focus="touch = true" 
-                @blur="blur()"
                 @input="input()"
                 v-model="searchCity"
             >
-            <img src="@/assets/focus.png" alt="" class="search__target">
+            <img src="@/assets/Color.png" alt="" class="search__target" v-if="touch === true" @click="touch = false">
+            <img src="@/assets/focus.png" alt="" class="search__target" v-else>
         </div>
         <div :class="{ antisomething: touch === false}">
             <div v-if="touch === false">
@@ -64,11 +64,6 @@ export default {
         }
     },
     methods:{
-        blur(){
-            setTimeout(()=>{
-                this.touch = false
-            }, 200)
-        },
         input(){
             if(this.searchCity !== ''){
                 this.$store.dispatch('fetchWeather', this.searchCity)

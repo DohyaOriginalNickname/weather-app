@@ -15,7 +15,7 @@ export default {
                 case 'Moderate rain','Light rain shower','Light rain', 'Light drizzle':
                     image = require('@/assets/weather-icon/Rain.png')
                     break;
-                case 'Moderate or heavy rain with thunder':
+                case 'Moderate or heavy rain with thunder','Patchy light rain with thunder':
                     image = require('@/assets/weather-icon/Thunder.png')
                     break;
                 default:
