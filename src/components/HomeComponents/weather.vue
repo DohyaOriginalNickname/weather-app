@@ -40,10 +40,6 @@ export default {
         color: white;
         margin: 80px 0 0 0;
     }
-    
-    .weather__icon{
-        max-width: 148px;
-    }
     .weather__temp{
         margin-top: 5px;
         height: 56px;

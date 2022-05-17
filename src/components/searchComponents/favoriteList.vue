@@ -92,7 +92,6 @@ export default {
         if(JSON.parse(localStorage.getItem('favoriteList')) !== null){
             this.$store.dispatch('updateWeather', JSON.parse(localStorage.getItem('favoriteList')))
         }
-        
     }
 }
 </script>

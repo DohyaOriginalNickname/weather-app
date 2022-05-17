@@ -81,6 +81,7 @@ export default {
             return dayHours
         },
         todayDate(){
+            let todayDate
             const mounths = {
                 '01':'янв',
                 '02': 'фев',
@@ -95,8 +96,7 @@ export default {
                 '11':'нояб',
                 '12':'дек'
             }
-            console.log(Object.values(mounths)[0])
-            let todayDate
+            
             for (let i = 0; i <Object.keys(mounths).length; i++) {
                 if(Object.keys(mounths)[i] === this.city.dayHours[0].time.slice(5,7)){
                     todayDate = `${this.city.dayHours[0].time.slice(8,11)} ${Object.values(mounths)[i]}`

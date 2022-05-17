@@ -13,7 +13,7 @@
             <div v-if="city.city || city.favorite === false" class="star">
                 <img src="@/assets/Stars/EmptyStar.png" @click="addToFavoriteCity()">
             </div>
-            <div v-if="city.favorite" class="star">
+            <div v-if="city.favorite" class="star" @click="DeleteCity()">
                 <img src="@/assets/Stars/WhiteStar.png">
             </div>
         </div>
@@ -35,7 +35,7 @@
             </div>
         </div>
         
-        <snackbar :addFavorite="addFavorite">Локация добавлена в избранное</snackbar>
+        <snackbar :addFavorite="addFavorite"></snackbar>
 
     </div>
 </template>
@@ -67,10 +67,24 @@ export default {
     },
     methods: {
         addToFavoriteCity(){
+            this.addFavorite = true
             this.city.favorite = true
             this.$store.commit('addFavoriteCity', this.city)
 
+            
             const x = document.getElementById('snackbar')
+            x.querySelector('.snackbar__text').textContent = 'Локация добавлена в избранное' 
+            x.className = 'show'
+            setTimeout(()=>{ x.className = x.className.replace("show", "") }, 2000)
+        },
+        DeleteCity(){
+            this.addFavorite = false
+            this.city.favorite = false
+            this.$store.dispatch('deleteFavoriteCity', this.city)
+
+            
+            const x = document.getElementById('snackbar')
+            x.querySelector('.snackbar__text').textContent = 'Локация удалена'
             x.className = 'show'
             setTimeout(()=>{ x.className = x.className.replace("show", "") }, 2000)
         },
