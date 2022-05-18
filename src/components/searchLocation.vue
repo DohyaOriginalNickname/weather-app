@@ -1,20 +1,37 @@
 <template>
-    <div >
-        <div class="search">
-            <a @click.prevent="$router.push('/')">
-                <img src="@/assets/arrow.png" alt="" class="search__arrow">
-            </a>
-            <input 
-                type="text" 
-                placeholder="Поиск локации" 
-                class="search__input" 
-                @focus="touch = true" 
-                @input="input()"
-                v-model="searchCity"
-            >
-            <img src="@/assets/Color.png" alt="" class="search__target" v-if="touch === true" @click="touch = false">
-            <img src="@/assets/focus.png" alt="" class="search__target" v-else>
+    <div>
+        <div v-if="touch === false">
+            <div class="search" >
+                <a @click.prevent="$router.push('/')">
+                    <img src="@/assets/arrow.png" alt="" class="search__arrow">
+                </a>
+                <input 
+                    type="text" 
+                    placeholder="Поиск локации" 
+                    class="search__input"
+                    @focus="touch = true" 
+                >
+                <img src="@/assets/focus.png" alt="" class="search__target">
+            </div>
         </div>
+        <div v-else>
+            <div class="search-focus" >
+                <a @click.prevent="$router.push('/')">
+                    <img src="@/assets/arrow.png" alt="" class="search__arrow">
+                </a>
+                <input 
+                    type="text" 
+                    placeholder="Поиск локации" 
+                    class="search__input"
+                    @input="input()"
+                    v-model="searchCity"
+                >
+                <img src="@/assets/Color.png" alt="" class="search__target"  @click="clearInput()">
+            </div>
+            <div class="border-bottom"></div>
+        </div>
+        
+
         <div :class="{ antisomething: touch === false}">
             <div v-if="touch === false">
                 <favorite-list></favorite-list>
@@ -68,6 +85,10 @@ export default {
             if(this.searchCity !== ''){
                 this.$store.dispatch('fetchWeather', this.searchCity)
             }
+        },
+        clearInput(){
+            this.touch = false
+            this.searchCity = ''
         }
     },
 }
@@ -77,11 +98,24 @@ export default {
     .search{
         min-width: 343px;
         height: 48px;
-        border-radius: 16px ;
+        border-radius: 16px;
         box-shadow: 0px 0px 2px rgba(11, 26, 34, 0.26);
         display: flex;
         margin: 25px 16px;
         align-items: center;
+    }
+    .search-focus{
+        display: flex;
+        margin: 25px 16px 5px;
+        align-items: center;
+        min-width: 343px;
+        height: 36px;
+    }
+    .border-bottom{
+        min-width: 343px;
+        height: 1px;
+        background: #E9E9E9;
+        margin: 0 0 25px 0;
     }   
     .search__arrow{
         width: 24px;

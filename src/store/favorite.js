@@ -31,6 +31,7 @@ export const favorite = {
         deleteFavoriteCity({commit,state}, payload){
             if(Array.isArray(payload)){
                 state.favoriteCities = payload
+                commit('changeCity',state.favoriteCities.find((post) => post.favorite !== true))
                 commit('deleteFavoriteCity')
             }else{
                 let array = JSON.parse(localStorage.getItem('favoriteList'))

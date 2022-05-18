@@ -26,8 +26,21 @@ export const history = {
     },
     actions: {
         addToHistory({commit,state} ,payload){
-            commit('addToHistory',payload)
-            localStorage.setItem('history', JSON.stringify(state.searchHistory))
+            const currentHistory = JSON.parse(localStorage.getItem('history'))
+            if (currentHistory.length === 0) {
+                commit('addToHistory',payload)
+                localStorage.setItem('history', JSON.stringify(state.searchHistory))
+            }
+            for (let i = 0; i < currentHistory.length; i++) {
+                console.log(currentHistory[i].city !== payload.city)
+                if(currentHistory[i].city !== payload.city){
+                    commit('addToHistory',payload)
+                    localStorage.setItem('history', JSON.stringify(state.searchHistory))
+                }else{
+                    localStorage.setItem('history', JSON.stringify(state.searchHistory))
+                    break
+                }
+            }
         },
         getHistory({commit}){
             commit('getHistory', localStorage.getItem('history'))
