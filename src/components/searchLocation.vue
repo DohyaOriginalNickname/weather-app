@@ -14,6 +14,7 @@
                 <img src="@/assets/focus.png" alt="" class="search__target">
             </div>
         </div>
+        
         <div v-else>
             <div class="search-focus" >
                 <a @click.prevent="$router.push('/')">
@@ -44,7 +45,7 @@
                     </div>
                 </div>
                 <div v-else>
-                    <search-city :searchCity="searchCity"></search-city>
+                    <search-city></search-city>
                 </div>
             </div>
         </div>

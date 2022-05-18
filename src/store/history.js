@@ -32,10 +32,10 @@ export const history = {
                 localStorage.setItem('history', JSON.stringify(state.searchHistory))
             }
             for (let i = 0; i < currentHistory.length; i++) {
-                console.log(currentHistory[i].city !== payload.city)
                 if(currentHistory[i].city !== payload.city){
                     commit('addToHistory',payload)
                     localStorage.setItem('history', JSON.stringify(state.searchHistory))
+                    break
                 }else{
                     localStorage.setItem('history', JSON.stringify(state.searchHistory))
                     break
