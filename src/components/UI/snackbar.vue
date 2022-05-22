@@ -1,5 +1,5 @@
 <template>
-    <div id="snackbar">
+    <div class="snackbar">
         <img src="@/assets/Succses.png" alt="">
         <p class="snackbar__text"><slot></slot></p>
         <p class="snackbar__return" v-if="!addFavorite">Отменить</p>
@@ -19,7 +19,7 @@ export default {
 
 
 <style scoped>
-    #snackbar{
+    .snackbar{
         visibility: hidden;
         display: flex;
         flex-direction: row;
@@ -30,14 +30,14 @@ export default {
         text-align: center; 
         position: fixed; 
         left: calc(50% - 283px/2);
-        top: 587px; 
+        bottom: 24px; 
         background: #FFFFFF;
         border: 1px solid #E9E9E9;
         box-sizing: border-box;
         box-shadow: 2px 2px 4px rgba(11, 26, 34, 0.12);
         border-radius: 8px;
     }
-    #snackbar.show {
+    .show {
         visibility: visible;
         animation: fadein .6s, fadeout 0.8s 1.5s;
     }

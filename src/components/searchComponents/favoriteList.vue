@@ -1,5 +1,5 @@
 <template>
-    <div v-if="cities.length !== 0 ">
+    <div v-if="cities.length !== 0 " class="scroll">
         <div class="favorite-list border" v-for="log in dayHours" :key="log.id" @click="toTheStore(log)">
             <div>
                 <img :src="log.img" class="favorite-list__image">
@@ -24,7 +24,7 @@
             </div>
         </div>
         
-        <snackbar>Локация удалена</snackbar>
+        <snackbar ref="snackbar">Локация удалена</snackbar>
     </div>
     <div v-else class="something">
         <p>У вас нету избранных городов</p>
@@ -83,9 +83,11 @@ export default {
                     break
                 }
             }
-            const x = document.getElementById('snackbar')
-            x.className = 'show'
-            setTimeout(()=>{ x.className = x.className.replace("show", "") }, 2000)
+
+            
+            const snackbar = this.$refs.snackbar.$el
+            snackbar.className = 'snackbar show'
+            setTimeout(()=>{ snackbar.className =  snackbar.className.replace('snackbar show', 'snackbar')}, 2000) 
         },
     },
     created(){
@@ -97,6 +99,9 @@ export default {
 </script>
 
 <style scoped>
+    .scroll{
+        overflow-y: scroll; height: 550px;
+    }
     .favorite-list{
         margin-top: 18px;
         display: flex;

@@ -38,7 +38,7 @@ export default {
     .weather{
         text-align:  center;
         color: white;
-        margin: 80px 0 0 0;
+        margin: 50px 0 0 0;
     }
     .weather__temp{
         margin-top: 5px;

@@ -20,22 +20,20 @@
         
         <weather-info :temp="city.temp" :description="city.weather" :image="getImg"></weather-info>
 
-        <div>
-            <div 
-                class="choice-locaton" 
-                @click="$router.push('/search')" 
-                v-if="!city.city"
-            >
-                <button class="choice-location__button">Выбрать локацию</button>
-            </div>
-            <div v-else>
-                <today-info 
-                    :city="city"
-                ></today-info>
-            </div>
-        </div>
         
-        <snackbar :addFavorite="addFavorite"></snackbar>
+        <div 
+            class="choice-locaton" 
+            @click="$router.push('/search')" 
+            v-if="!city.city"
+        >
+            <button class="choice-location__button">Выбрать локацию</button>
+        </div>
+        <div v-else>
+            <today-info 
+                :city="city"
+            ></today-info>
+        </div>
+        <snackbar ref="snackbar" :addFavorite="addFavorite"></snackbar>
 
     </div>
 </template>
@@ -72,10 +70,11 @@ export default {
             this.$store.commit('addFavoriteCity', this.city)
 
             
-            const x = document.getElementById('snackbar')
-            x.querySelector('.snackbar__text').textContent = 'Локация добавлена в избранное' 
-            x.className = 'show'
-            setTimeout(()=>{ x.className = x.className.replace("show", "") }, 2000)
+            
+            const snackbar = this.$refs.snackbar.$el
+            snackbar.className = 'snackbar show'
+            snackbar.querySelector('.snackbar__text').innerText = 'Локация добавлена в избранное'
+            setTimeout(()=>{ snackbar.className =  snackbar.className.replace('snackbar show', 'snackbar')}, 2000)
         },
         DeleteCity(){
             this.addFavorite = false
@@ -83,10 +82,11 @@ export default {
             this.$store.dispatch('deleteFavoriteCity', this.city)
 
             
-            const x = document.getElementById('snackbar')
-            x.querySelector('.snackbar__text').textContent = 'Локация удалена'
-            x.className = 'show'
-            setTimeout(()=>{ x.className = x.className.replace("show", "") }, 2000)
+            const snackbar = this.$refs.snackbar.$el
+            snackbar.className = 'snackbar show'
+            snackbar.querySelector('.snackbar__text').innerText = 'Локация удалена'
+            setTimeout(()=>{ snackbar.className =  snackbar.className.replace('snackbar show', 'snackbar')}, 2000)
+            
         },
     }
 }
@@ -96,7 +96,6 @@ export default {
     .wrapper{
         position: relative;
         background-color: #47B1E6;
-        height: 667px;
     }
     .background__left{
         background-image: url("../assets/Background/Vector 12.png");
@@ -117,9 +116,10 @@ export default {
         justify-content: center;
     }
     .choice-location__button{
+        position: fixed;
         min-width: 200px;
         height: 56px;
-        margin: 250px 0 0 0;
+        bottom: 36px;
         border-radius: 8px;
         background-color: white;
         color:#47B1E6;
@@ -128,6 +128,7 @@ export default {
     .geolocation{
         display: flex;
         padding: 5px;
+        padding-top:25px;
         margin: 0 10px;
         cursor: pointer;
     }

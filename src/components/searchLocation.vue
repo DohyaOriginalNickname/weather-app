@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="padding">
         <div v-if="touch === false">
             <div class="search" >
                 <a @click.prevent="$router.push('/')">
@@ -17,7 +17,7 @@
         
         <div v-else>
             <div class="search-focus" >
-                <a @click.prevent="$router.push('/')">
+                <a @click.prevent='this.touch = false'>
                     <img src="@/assets/arrow.png" alt="" class="search__arrow">
                 </a>
                 <input 
@@ -27,7 +27,8 @@
                     @input="input()"
                     v-model="searchCity"
                 >
-                <img src="@/assets/Color.png" alt="" class="search__target"  @click="clearInput()">
+                <img src="@/assets/focus.png" alt="" class="search__target" v-if="searchCity === ''">
+                <img src="@/assets/Color.png" alt="" class="search__target" v-else @click="clearInput()">
             </div>
             <div class="border-bottom"></div>
         </div>
@@ -88,7 +89,6 @@ export default {
             }
         },
         clearInput(){
-            this.touch = false
             this.searchCity = ''
         }
     },
@@ -96,18 +96,21 @@ export default {
 </script>
 
 <style scoped>
+    .padding{
+        padding-top:25px;
+    }
     .search{
         min-width: 343px;
         height: 48px;
         border-radius: 16px;
         box-shadow: 0px 0px 2px rgba(11, 26, 34, 0.26);
         display: flex;
-        margin: 25px 16px;
+        margin: 0px 16px;
         align-items: center;
     }
     .search-focus{
         display: flex;
-        margin: 25px 16px 5px;
+        margin: 0px 16px 5px;
         align-items: center;
         min-width: 343px;
         height: 36px;
@@ -151,7 +154,7 @@ export default {
     #loader{
         position: absolute;
         width: 100%;
-        height: 667px;
+        height: 100%;
         left: 0px;
         top: 0px;
 
