@@ -66,7 +66,7 @@ export default {
                     case 'Cloudy','Overcast','Mist':
                         data.img = require('@/assets/weather-icon/Union.png')
                         break;
-                    case 'Moderate rain','Light rain shower','Light rain','Light drizzle':
+                    case 'Moderate rain', 'Light rain shower', 'Light rain', 'Light drizzle', 'Patchy rain possible':
                         data.img = require('@/assets/weather-icon/Rain.png')
                         break;
                     case 'Thunder':
@@ -117,7 +117,7 @@ export default {
         height: 24px;
         position: absolute;
         left: 16px;
-        top: 387px;
+        bottom: 256px;
         line-height: 24px;
     }
 

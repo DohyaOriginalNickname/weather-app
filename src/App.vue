@@ -1,6 +1,13 @@
 <template>
   <div class="wrapper">
-    <router-view></router-view>
+    <router-view v-slot="{Component,route}">
+      <transition 
+        :enter-active-class="route.meta.enterClass" 
+        :leave-active-class="route.meta.leaveClass" mode="out-in"
+      >
+        <component :is="Component"/>
+      </transition>
+    </router-view>
   </div>
 </template>
 
@@ -15,7 +22,6 @@ export default {
 
 <style scoped>
   .wrapper{
-    position: relative;
     min-height: 667px;
   }
 </style>

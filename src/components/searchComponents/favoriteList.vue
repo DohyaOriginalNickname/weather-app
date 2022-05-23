@@ -1,18 +1,20 @@
 <template>
     <div v-if="cities.length !== 0 " class="scroll">
         <div class="favorite-list border" v-for="log in dayHours" :key="log.id" @click="toTheStore(log)">
-            <div>
-                <img :src="log.img" class="favorite-list__image">
-            </div>
-            <div class="favorite-list__info">
+            <div style="display: flex; min-width: 250px;">
                 <div>
-                    <p>{{log.city}}</p>
+                    <img :src="log.img" class="favorite-list__image">
                 </div>
-                <div class="favorite-list__info_weather">
-                    <p>{{log.weather}}</p>
-                </div>
-                <div>
-                    <p>{{log.temp}}° С</p>
+                <div class="favorite-list__info">
+                    <div>
+                        <p>{{log.city}}</p>
+                    </div>
+                    <div class="favorite-list__info_weather">
+                        <p>{{log.weather}}</p>
+                    </div>
+                    <div>
+                        <p>{{log.temp}}° С</p>
+                    </div>
                 </div>
             </div>
             <div>
@@ -59,7 +61,7 @@ export default {
                     case 'Cloudy','Overcast','Mist':
                         data.img = require('@/assets/weather-icon/Union.png')
                         break;
-                    case 'Moderate rain','Light rain shower','Light rain','Light drizzle':
+                    case 'Moderate rain','Light rain shower','Light rain','Light drizzle','Patchy rain possible':
                         data.img = require('@/assets/weather-icon/Rain.png')
                         break;
                     case 'Thunder':
@@ -79,6 +81,7 @@ export default {
             for (let i = 0; i < this.dayHours.length; i++) {
                 if (this.dayHours[i] === log) {
                     this.dayHours[i].favorite = false
+                    localStorage.setItem('selectedCity', JSON.stringify(this.dayHours[i]))
                     this.$store.dispatch('deleteFavoriteCity', this.dayHours)
                     break
                 }
@@ -100,13 +103,15 @@ export default {
 
 <style scoped>
     .scroll{
-        overflow-y: scroll; height: 550px;
+        overflow-y: scroll; 
+        max-height: 800px;
     }
     .favorite-list{
         margin-top: 18px;
         display: flex;
         align-items: flex-start;
         padding: 0px;
+        justify-content: space-between;
     }
     .favorite-list__info{
         font-weight: 600;
@@ -131,7 +136,7 @@ export default {
     }
 
     .favorite-list__star{
-        position: absolute; 
+        position: relative; 
         right: 0; 
         margin: 3px 18px;
     }

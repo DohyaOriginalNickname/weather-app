@@ -100,7 +100,7 @@ export default {
         padding-top:25px;
     }
     .search{
-        min-width: 343px;
+        min-width: 300px;
         height: 48px;
         border-radius: 16px;
         box-shadow: 0px 0px 2px rgba(11, 26, 34, 0.26);

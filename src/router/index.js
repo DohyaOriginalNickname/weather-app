@@ -5,12 +5,20 @@ import Home from '@/components/Home'
 const routes = [
   {
     path: '/',
-    component: Home
+    component: Home,
+    meta:{
+      enterClass: 'animate__animated animate__slideInLeft  animate__faster',
+      leaveClass: 'animate__animated animate__slideOutRight   animate__faster'
+    }
   },
 
   {
     path: '/search',
-    component: SearchLocation
+    component: SearchLocation,
+    meta:{
+      enterClass: 'animate__animated animate__slideInRight  animate__faster',
+      leaveClass: 'animate__animated animate__slideOutLeft animate__faster'
+    }
   }
 ]
 

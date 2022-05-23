@@ -60,17 +60,20 @@ export default {
     },
     computed: {
         city(){
-            return this.$store.state.search.city
+            if (Object.keys(this.$store.state.search.city).length === 0 && localStorage.getItem('selectedCity') ) {
+                return JSON.parse(localStorage.getItem('selectedCity'))
+            }else{
+                return this.$store.state.search.city
+            }
         }
     },
     methods: {
         addToFavoriteCity(){
             this.addFavorite = true
             this.city.favorite = true
+            localStorage.setItem('selectedCity', JSON.stringify(this.city))
             this.$store.commit('addFavoriteCity', this.city)
 
-            
-            
             const snackbar = this.$refs.snackbar.$el
             snackbar.className = 'snackbar show'
             snackbar.querySelector('.snackbar__text').innerText = 'Локация добавлена в избранное'
@@ -79,14 +82,13 @@ export default {
         DeleteCity(){
             this.addFavorite = false
             this.city.favorite = false
+            localStorage.setItem('selectedCity', JSON.stringify(this.city))
             this.$store.dispatch('deleteFavoriteCity', this.city)
 
-            
             const snackbar = this.$refs.snackbar.$el
             snackbar.className = 'snackbar show'
             snackbar.querySelector('.snackbar__text').innerText = 'Локация удалена'
             setTimeout(()=>{ snackbar.className =  snackbar.className.replace('snackbar show', 'snackbar')}, 2000)
-            
         },
     }
 }
@@ -94,7 +96,6 @@ export default {
 
 <style scoped>
     .wrapper{
-        position: relative;
         background-color: #47B1E6;
     }
     .background__left{
@@ -102,14 +103,14 @@ export default {
         position: absolute;
         top: 92px;
         min-width: 88px;
-        height: 235px;
+        min-height: 235px;
     }
     .background__right{
         background-image: url("../assets/Background/Vector 11.png");
         position: absolute;
         right: 0;
         min-width: 230px;
-        height: 280px;
+        min-height: 280px;
     }
     .choice-locaton{
         display: flex;
