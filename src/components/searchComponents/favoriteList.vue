@@ -25,13 +25,13 @@
                 >
             </div>
         </div>
-        
+
         <snackbar ref="snackbar">Локация удалена</snackbar>
     </div>
     <div v-else class="something">
         <p>У вас нету избранных городов</p>
     </div>
-
+    
 </template>
 
 <script>
@@ -104,7 +104,7 @@ export default {
 <style scoped>
     .scroll{
         overflow-y: scroll; 
-        max-height: 800px;
+        max-height: 600px;
     }
     .favorite-list{
         margin-top: 18px;

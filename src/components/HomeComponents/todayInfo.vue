@@ -109,15 +109,18 @@ export default {
 </script>
 
 <style scoped>
+    .info{
+        position: absolute;
+        width: 100%;
+        bottom: 0;
+    }
     .info__other{
         color: white;
         display: flex;
         justify-content: space-between;
         min-width: 95%;
         height: 24px;
-        position: absolute;
-        left: 16px;
-        bottom: 256px;
+        margin: 0 16px 36px;
         line-height: 24px;
     }
 
@@ -128,17 +131,15 @@ export default {
         margin: 0 10px;
     }
     .info__main{
-        position: absolute;
-        bottom: 0;
-        width: 100%;
         height: 220px;
         background: #FFFFFF;
         border-radius: 24px 24px 0px 0px;
     }
     .info__text{
+        padding-top: 22px;
         display:flex; 
         justify-content: space-between;
-        margin: 24px 16px 12px;
+        margin: 0 16px 20px;
     }
     .info__temp{
         width: 171px;
@@ -157,6 +158,7 @@ export default {
         color: #1C293D;
     }
     .info__data{
+        padding: 0 10px;
         display: flex;
         justify-content: space-between;
         gap: 16px;

@@ -24,7 +24,7 @@
                     type="text" 
                     placeholder="Поиск локации" 
                     class="search__input"
-                    @input="input()"
+                    @keyup="input()"
                     v-model="searchCity"
                 >
                 <img src="@/assets/focus.png" alt="" class="search__target" v-if="searchCity === ''">
@@ -84,9 +84,14 @@ export default {
     },
     methods:{
         input(){
-            if(this.searchCity !== ''){
-                this.$store.dispatch('fetchWeather', this.searchCity)
-            }
+            let typingTimer
+            let doneTypingInterval = 300
+            clearTimeout(typingTimer)
+            typingTimer = setTimeout(()=>{
+                if(this.searchCity !== ''){
+                    this.$store.dispatch('fetchWeather', this.searchCity)
+                }
+            },doneTypingInterval)
         },
         clearInput(){
             this.searchCity = ''
