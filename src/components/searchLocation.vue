@@ -1,60 +1,63 @@
 <template>
-    <div class="padding" :class="{ popupBg: popup === true}">
-        <div v-if="touch === false">
-            <div class="search" >
-                <a @click.prevent="$router.push('/')">
-                    <img src="@/assets/arrow.png" alt="" class="search__arrow">
-                </a>
-                <input 
-                    type="text" 
-                    placeholder="Поиск локации" 
-                    class="search__input"
-                    @focus="touch = true" 
-                >
-                <img src="@/assets/focus.png" alt="" class="search__target" @click.stop="getCurrentLoc()">
-            </div>
-        </div>
-        
-        <div v-else>
-            <div class="search-focus" >
-                <a @click.prevent='this.touch = false'>
-                    <img src="@/assets/arrow.png" alt="" class="search__arrow">
-                </a>
-                <input 
-                    type="text" 
-                    placeholder="Поиск локации" 
-                    class="search__input"
-                    @keyup="input()"
-                    v-model="searchCity"
-                >
-                <img src="@/assets/focus.png" alt="" class="search__target" v-if="searchCity === ''">
-                <img src="@/assets/Color.png" alt="" class="search__target" v-else @click="clearInput()">
-            </div>
-            <div class="border-bottom"></div>
-        </div>
-        
-
-        <div :class="{ antisomething: touch === false}">
+    <div>
+        <div class="popupBg" v-if="popup === true"></div>
+        <div class="padding" :class="{ notTouch: popup === true}">
             <div v-if="touch === false">
-                <favorite-list></favorite-list>
+                <div class="search" >
+                    <a @click.prevent="$router.push('/')">
+                        <img src="@/assets/arrow.png" alt="" class="search__arrow">
+                    </a>
+                    <input 
+                        type="text" 
+                        placeholder="Поиск локации" 
+                        class="search__input"
+                        @focus="touch = true" 
+                    >
+                    <img src="@/assets/focus.png" alt="" class="search__target" @click.stop="getCurrentLoc()">
+                </div>
             </div>
+            
             <div v-else>
-                <div v-if=" searchCity === '' ">
-                    <p v-if="historyCities.length === 0" class="something">Введите название города</p>
-                    <div v-else>
-                        <search-history></search-history>
-                    </div>
+                <div class="search-focus" >
+                    <a @click.prevent='this.touch = false'>
+                        <img src="@/assets/arrow.png" alt="" class="search__arrow">
+                    </a>
+                    <input 
+                        type="text" 
+                        placeholder="Поиск локации" 
+                        class="search__input"
+                        @keyup="input()"
+                        v-model="searchCity"
+                    >
+                    <img src="@/assets/focus.png" alt="" class="search__target" v-if="searchCity === ''">
+                    <img src="@/assets/Color.png" alt="" class="search__target" v-else @click="clearInput()">
+                </div>
+                <div class="border-bottom"></div>
+            </div>
+            
+
+            <div :class="{ antisomething: touch === false}">
+                <div v-if="touch === false">
+                    <favorite-list></favorite-list>
                 </div>
                 <div v-else>
-                    <search-city></search-city>
+                    <div v-if=" searchCity === '' ">
+                        <p v-if="historyCities.length === 0" class="something">Введите название города</p>
+                        <div v-else>
+                            <search-history></search-history>
+                        </div>
+                    </div>
+                    <div v-else>
+                        <search-city></search-city>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <pop-up :popup="popup" @closePopUp="closePopUp" ></pop-up>
+            <pop-up :popup="popup" @closePopUp="closePopUp" ></pop-up>
 
-        <div id="loader" v-if="loading === true">
-            <img src="@/assets/Vp3R.gif" alt="">
+            <div id="loader" v-if="loading === true">
+                <img src="@/assets/Vp3R.gif" alt="">
+            </div>
         </div>
     </div>
 </template>
@@ -205,8 +208,11 @@ export default {
         left: 0;
         width: 100%;
         height: 100vh;
-        background: rgba(0,0,0,0.5);
-        pointer-events: none; 
+        background:rgba(0, 0, 0, 0.5) ;
+        opacity: 0.5;
         transition: 0.5s all;
+    }
+    .notTouch{
+        pointer-events: none; 
     }
 </style>
