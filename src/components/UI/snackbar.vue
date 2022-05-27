@@ -2,14 +2,14 @@
     <div class="snackbar">
         <img src="@/assets/Succses.png" alt="">
         <p class="snackbar__text"><slot></slot></p>
-        <p class="snackbar__return" v-if="!addFavorite">Отменить</p>
+        <p class="snackbar__return" v-if="!showUndoBtn">Отменить</p>
     </div>
 </template>
 
 <script>
 export default {
     props: {
-        addFavorite:{
+        showUndoBtn:{
             type: Boolean,
             default: false
         }

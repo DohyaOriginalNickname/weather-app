@@ -1,5 +1,5 @@
 <template>
-    <div class="padding">
+    <div class="padding" :class="{ popupBg: popup === true}">
         <div v-if="touch === false">
             <div class="search" >
                 <a @click.prevent="$router.push('/')">
@@ -11,7 +11,7 @@
                     class="search__input"
                     @focus="touch = true" 
                 >
-                <img src="@/assets/focus.png" alt="" class="search__target">
+                <img src="@/assets/focus.png" alt="" class="search__target" @click.stop="getCurrentLoc()">
             </div>
         </div>
         
@@ -51,6 +51,7 @@
             </div>
         </div>
 
+        <pop-up :popup="popup" @closePopUp="closePopUp" ></pop-up>
 
         <div id="loader" v-if="loading === true">
             <img src="@/assets/Vp3R.gif" alt="">
@@ -62,17 +63,20 @@
 import favoriteList from './searchComponents/favoriteList.vue'
 import SearchCity from './searchComponents/searchCity.vue'
 import SearchHistory from './searchComponents/searchHistory.vue'
+import popUp from './searchComponents/popUp.vue'
 export default {
     data(){
         return{
             touch: false,
-            searchCity: ''
+            searchCity: '',
+            popup: false
         }
     },
     components:{
         favoriteList,
         SearchHistory,
-        SearchCity
+        SearchCity,
+        popUp
     },
     computed:{
         historyCities(){
@@ -85,7 +89,7 @@ export default {
     methods:{
         input(){
             let typingTimer
-            let doneTypingInterval = 300
+            let doneTypingInterval = 500
             clearTimeout(typingTimer)
             typingTimer = setTimeout(()=>{
                 if(this.searchCity !== ''){
@@ -95,6 +99,23 @@ export default {
         },
         clearInput(){
             this.searchCity = ''
+        },
+        getCurrentLoc(){
+            navigator.geolocation.getCurrentPosition(
+                async (position) => {
+                    const server = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${position.coords.latitude},${position.coords.longitude}&key=AIzaSyAUDwkgoD41c6QCUqRZ40R7bm5Ccg_J9y0`
+                    const response = await fetch(server,{method: 'GET'})
+                    const responseResult = await response.json()
+                    this.$store.dispatch('getWeatherPossibleCity', responseResult.plus_code.compound_code.slice(9,18)) 
+                }
+            )
+            setTimeout(()=>{
+                this.popup = true
+            },100)
+            
+        },
+        closePopUp(){
+            this.popup = false
         }
     },
 }
@@ -178,4 +199,14 @@ export default {
 		bottom: 0;
 		margin: auto
 	}
+    .popupBg{
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background: rgba(0,0,0,0.5);
+        pointer-events: none; 
+        transition: 0.5s all;
+    }
 </style>

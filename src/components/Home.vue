@@ -33,7 +33,7 @@
                 :city="city"
             ></today-info>
         </div>
-        <snackbar ref="snackbar" :addFavorite="addFavorite"></snackbar>
+        <snackbar ref="snackbar" :showUndoBtn="showUndoBtn"></snackbar>
 
     </div>
 </template>
@@ -48,7 +48,7 @@ import getImg from '../mixins/getImg'
 export default {
     data(){
         return{
-            addFavorite: true,
+            showUndoBtn: true,
         }
     },
     mixins:[getImg],
@@ -69,7 +69,7 @@ export default {
     },
     methods: {
         addToFavoriteCity(){
-            this.addFavorite = true
+            this.showUndoBtn = true
             this.city.favorite = true
             localStorage.setItem('selectedCity', JSON.stringify(this.city))
             this.$store.commit('addFavoriteCity', this.city)
@@ -80,7 +80,7 @@ export default {
             setTimeout(()=>{ snackbar.className =  snackbar.className.replace('snackbar show', 'snackbar')}, 2000)
         },
         DeleteCity(){
-            this.addFavorite = false
+            this.showUndoBtn = false
             this.city.favorite = false
             localStorage.setItem('selectedCity', JSON.stringify(this.city))
             this.$store.dispatch('deleteFavoriteCity', this.city)
@@ -90,6 +90,9 @@ export default {
             snackbar.querySelector('.snackbar__text').innerText = 'Локация удалена'
             setTimeout(()=>{ snackbar.className =  snackbar.className.replace('snackbar show', 'snackbar')}, 2000)
         },
+    },
+    created(){
+        this.$store.dispatch('updateWeather', this.city)
     }
 }
 </script>

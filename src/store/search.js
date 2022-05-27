@@ -14,11 +14,15 @@ class City{
 
 export const search = {
     state: {
-        city: {}
+        city: {},
+        possibleLocations:{}
     },
     mutations:{
         changeCity(state, payload){
             state.city = payload
+        },
+        possibleLocations(state, payload){
+            state.possibleLocations = payload
         }
     },
     actions: {
@@ -40,12 +44,33 @@ export const search = {
         },
         async updateWeather({commit}, payload){
             const updateCities = []
-            for(let i = 0; i<payload.length; i++){
-                commit('setLoading', true)
-                const server = `https://api.weatherapi.com/v1/forecast.json?key=55ef9d4e33a64c75afb55229221105&q=${payload[i].city}&days=1&aqi=yes&alerts=no`
+            let updateCity = {}
+            if(Array.isArray(payload)){
+                for(let i = 0; i<payload.length; i++){
+                    commit('setLoading', true)
+                    const server = `https://api.weatherapi.com/v1/forecast.json?key=55ef9d4e33a64c75afb55229221105&q=${payload[i].city}&days=1&aqi=yes&alerts=no`
+                    const response = await fetch(server,{method: 'GET'})
+                    const responseResult = await response.json()
+                    updateCities.push(new City(
+                        responseResult.location.country,
+                        responseResult.location.name,
+                        responseResult.current.condition.text,
+                        responseResult.current.temp_c,
+                        responseResult.forecast.forecastday[0].day.mintemp_c,
+                        responseResult.forecast.forecastday[0].day.maxtemp_c,
+                        responseResult.current.humidity,
+                        responseResult.current.wind_kph,
+                        responseResult.forecast.forecastday[0].hour
+                    ))
+                    updateCities[i].favorite = true
+                }
+                commit('updateFavoriteCity',updateCities)
+                commit('setLoading', false)
+            }else{
+                const server = `https://api.weatherapi.com/v1/forecast.json?key=55ef9d4e33a64c75afb55229221105&q=${payload.city}&days=1&aqi=yes&alerts=no`
                 const response = await fetch(server,{method: 'GET'})
                 const responseResult = await response.json()
-                updateCities.push(new City(
+                updateCity = new City(
                     responseResult.location.country,
                     responseResult.location.name,
                     responseResult.current.condition.text,
@@ -55,11 +80,12 @@ export const search = {
                     responseResult.current.humidity,
                     responseResult.current.wind_kph,
                     responseResult.forecast.forecastday[0].hour
-                ))
-                updateCities[i].favorite = true
+                )
+                if(payload.favorite === true){
+                    updateCity.favorite = true
+                }
+                commit('changeCity', updateCity)
             }
-            commit('updateFavoriteCity',updateCities)
-            commit('setLoading', false)
         },
         async updateHistoryCities({commit},payload){
             let i = 0
@@ -95,6 +121,23 @@ export const search = {
                 }
             }
             commit('updateHistory', updateHistoryCities)
-        }
+        },
+        async getWeatherPossibleCity({commit},city){
+            const server = `https://api.weatherapi.com/v1/forecast.json?key=55ef9d4e33a64c75afb55229221105&q=${city}&days=1&aqi=yes&alerts=no`
+            const response = await fetch(server,{method: 'GET'})
+            const responseResult = await response.json()
+            commit('possibleLocations',new City(
+                    responseResult.location.country,
+                    responseResult.location.name,
+                    responseResult.current.condition.text,
+                    responseResult.current.temp_c,
+                    responseResult.forecast.forecastday[0].day.mintemp_c,
+                    responseResult.forecast.forecastday[0].day.maxtemp_c,
+                    responseResult.current.humidity,
+                    responseResult.current.wind_kph,
+                    responseResult.forecast.forecastday[0].hour,
+                )
+            )
+        },
     }
 }

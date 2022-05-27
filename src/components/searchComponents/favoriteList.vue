@@ -81,7 +81,9 @@ export default {
             for (let i = 0; i < this.dayHours.length; i++) {
                 if (this.dayHours[i] === log) {
                     this.dayHours[i].favorite = false
-                    localStorage.setItem('selectedCity', JSON.stringify(this.dayHours[i]))
+                    if(this.dayHours[i].city === JSON.parse(localStorage.getItem('selectedCity')).city){
+                        localStorage.setItem('selectedCity',JSON.stringify(this.dayHours[i]))
+                    }
                     this.$store.dispatch('deleteFavoriteCity', this.dayHours)
                     break
                 }
