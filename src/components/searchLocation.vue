@@ -109,12 +109,18 @@ export default {
                     const server = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${position.coords.latitude},${position.coords.longitude}&key=AIzaSyAUDwkgoD41c6QCUqRZ40R7bm5Ccg_J9y0`
                     const response = await fetch(server,{method: 'GET'})
                     const responseResult = await response.json()
-                    this.$store.dispatch('getWeatherPossibleCity', responseResult.plus_code.compound_code.slice(9,18)) 
+                    this.$store.dispatch(
+                        'getWeatherPossibleCity', 
+                        responseResult.plus_code.compound_code.slice(
+                            responseResult.plus_code.compound_code.indexOf(" "),
+                            responseResult.plus_code.compound_code.indexOf(",")
+                        ).trim()
+                    )
                 }
             )
             setTimeout(()=>{
                 this.popup = true
-            },100)
+            },150)
             
         },
         closePopUp(){
