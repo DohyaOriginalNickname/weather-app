@@ -33,7 +33,7 @@
                 :city="city"
             ></today-info>
         </div>
-        <snackbar ref="snackbar" :showUndoBtn="showUndoBtn"></snackbar>
+        <snackbar ref="snackbar" :showUndoBtn="showUndoBtn" @canselDelete="canselDelete()"></snackbar>
 
     </div>
 </template>
@@ -82,14 +82,23 @@ export default {
         DeleteCity(){
             this.showUndoBtn = false
             this.city.favorite = false
-            localStorage.setItem('selectedCity', JSON.stringify(this.city))
-            this.$store.dispatch('deleteFavoriteCity', this.city)
+            
+            setTimeout(()=>{
+                if(this.city.favorite === true){
+                    return 0
+                }
+                localStorage.setItem('selectedCity', JSON.stringify(this.city))
+                this.$store.dispatch('deleteFavoriteCity', this.city)
+            },2000)
 
             const snackbar = this.$refs.snackbar.$el
             snackbar.className = 'snackbar show'
             snackbar.querySelector('.snackbar__text').innerText = 'Локация удалена'
             setTimeout(()=>{ snackbar.className =  snackbar.className.replace('snackbar show', 'snackbar')}, 2000)
         },
+        canselDelete(){
+            this.city.favorite = true
+        }
     },
     created(){
         this.$store.dispatch('updateWeather', this.city)
