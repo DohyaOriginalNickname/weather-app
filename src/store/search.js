@@ -1,5 +1,5 @@
 class City{
-    constructor(country,city, weather, temp, tempMin, tempMax, humidity, wind, dayHours, id){
+    constructor(country,city, weather, temp, tempMin, tempMax, humidity, wind, dayHours, id, favorite){
         this.country = country
         this.city = city
         this.weather = weather
@@ -8,8 +8,9 @@ class City{
         this.tempMax = tempMax
         this.humidity = humidity
         this.wind = wind
-        this.dayHours = dayHours,
+        this.dayHours = dayHours
         this.id = id
+        this.favorite = favorite
     }
 }
 
@@ -47,9 +48,9 @@ export const search = {
             const updateCities = []
             let updateCity = {}
             if(Array.isArray(payload)){
-                for(let i = 0; i<payload.length; i++){
+                await Promise.all(payload.map(async (iter) => {
                     commit('setLoading', true)
-                    const server = `https://api.weatherapi.com/v1/forecast.json?key=55ef9d4e33a64c75afb55229221105&q=${payload[i].city}&days=1&aqi=yes&alerts=no`
+                    const server = `https://api.weatherapi.com/v1/forecast.json?key=55ef9d4e33a64c75afb55229221105&q=${iter.city}&days=1&aqi=yes&alerts=no`
                     const response = await fetch(server,{method: 'GET'})
                     const responseResult = await response.json()
                     updateCities.push(new City(
@@ -62,10 +63,10 @@ export const search = {
                         responseResult.current.humidity,
                         responseResult.current.wind_kph,
                         responseResult.forecast.forecastday[0].hour,
-                        payload[i].id
+                        iter.id,
+                        iter.favorite
                     ))
-                    updateCities[i].favorite = true
-                }
+                }))
                 commit('updateFavoriteCity',updateCities)
                 commit('setLoading', false)
             }else{
