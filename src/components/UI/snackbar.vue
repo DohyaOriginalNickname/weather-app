@@ -2,7 +2,7 @@
     <div class="snackbar">
         <img src="@/assets/Succses.png" alt="">
         <p class="snackbar__text"><slot></slot></p>
-        <p class="snackbar__return" v-if="!showUndoBtn" @click="$emit('canselDelete')">Отменить</p>
+        <p class="snackbar__return" v-if="!showUndoBtn" @click="canselDelete()">Отменить</p>
     </div>
 </template>
 
@@ -12,6 +12,17 @@ export default {
         showUndoBtn:{
             type: Boolean,
             default: false
+        }
+    },
+    data(){
+        return{
+            revokeDelete: false
+        }
+    },
+    methods: {
+        canselDelete(){
+            this.revokeDelete = true
+            this.$emit('canselDelete', this.revokeDelete)
         }
     }
 }

@@ -1,6 +1,6 @@
 <template>
     <div v-if="cities.length !== 0 " class="scroll">
-        <div class="favorite-list border" v-for="log in dayHours" :key="log.id" @click="toTheStore(log)">
+        <div class="favorite-list border" v-for="log in dayHours" :key="log.id" :id="log.id" @click="toTheStore(log)">
             <div style="display: flex; min-width: 250px;">
                 <div>
                     <img :src="log.img" class="favorite-list__image">
@@ -26,7 +26,7 @@
             </div>
         </div>
 
-        <snackbar ref="snackbar">Локация удалена</snackbar>
+        <snackbar ref="snackbar" @canselDelete="canselDelete">Локация удалена</snackbar>
     </div>
     <div v-else class="something">
         <p>У вас нету избранных городов</p>
@@ -43,6 +43,11 @@ export default {
     computed: {
         cities(){
             return this.$store.state.favorite.favoriteCities
+        },
+        data(){
+            return{
+                revokeDelete: false
+            }
         },
         dayHours(){
             const dayHours = []
@@ -80,20 +85,32 @@ export default {
         DeleteCity(log){
             for (let i = 0; i < this.dayHours.length; i++) {
                 if (this.dayHours[i] === log) {
+                    const id = document.getElementById(log.id)
+                    id.style.display = 'none'
                     this.dayHours[i].favorite = false
-                    if(this.dayHours[i].city === JSON.parse(localStorage.getItem('selectedCity')).city){
-                        localStorage.setItem('selectedCity',JSON.stringify(this.dayHours[i]))
-                    }
-                    this.$store.dispatch('deleteFavoriteCity', this.dayHours)
-                    break
+                    
+                    setTimeout(()=>{
+                        if(this.revokeDelete){
+                            id.style.display = ''
+                            this.revokeDelete = false
+                            return 0
+                        }
+                        if(this.dayHours[i].city === JSON.parse(localStorage.getItem('selectedCity')).city){
+                            localStorage.setItem('selectedCity',JSON.stringify(this.dayHours[i]))
+                        }
+                        this.$store.dispatch('deleteFavoriteCity', this.dayHours)
+                        return 0
+                    },2000)
                 }
             }
-
             
             const snackbar = this.$refs.snackbar.$el
             snackbar.className = 'snackbar show'
             setTimeout(()=>{ snackbar.className =  snackbar.className.replace('snackbar show', 'snackbar')}, 2000) 
         },
+        canselDelete(data){
+            this.revokeDelete = data
+        }
     },
     created(){
         if(JSON.parse(localStorage.getItem('favoriteList')) !== null){

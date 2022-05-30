@@ -1,5 +1,5 @@
 class City{
-    constructor(country,city, weather, temp, tempMin, tempMax, humidity, wind, dayHours){
+    constructor(country,city, weather, temp, tempMin, tempMax, humidity, wind, dayHours, id){
         this.country = country
         this.city = city
         this.weather = weather
@@ -8,7 +8,8 @@ class City{
         this.tempMax = tempMax
         this.humidity = humidity
         this.wind = wind
-        this.dayHours = dayHours
+        this.dayHours = dayHours,
+        this.id = id
     }
 }
 
@@ -60,7 +61,8 @@ export const search = {
                         responseResult.forecast.forecastday[0].day.maxtemp_c,
                         responseResult.current.humidity,
                         responseResult.current.wind_kph,
-                        responseResult.forecast.forecastday[0].hour
+                        responseResult.forecast.forecastday[0].hour,
+                        payload[i].id
                     ))
                     updateCities[i].favorite = true
                 }
@@ -83,6 +85,9 @@ export const search = {
                 )
                 if(payload.favorite === true){
                     updateCity.favorite = true
+                }
+                if(payload.id){
+                    updateCity.id = payload.id
                 }
                 commit('changeCity', updateCity)
             }

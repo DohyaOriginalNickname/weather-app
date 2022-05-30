@@ -6,6 +6,7 @@ export const favorite = {
     },
     mutations: {
         addFavoriteCity(state, payload){
+            payload.id = Date.now().toString()
             state.favoriteCities.push(payload)
             localStorage.setItem('favoriteList', JSON.stringify(state.favoriteCities))
         },
