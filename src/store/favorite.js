@@ -7,7 +7,18 @@ export const favorite = {
     mutations: {
         addFavoriteCity(state, payload){
             payload.id = Date.now().toString()
-            state.favoriteCities.push(payload)
+            state.favoriteCities.unshift(payload)
+            console.log(state.favoriteCities)
+            if(state.favoriteCities.length > 1){
+                for (let i = 0; i < state.favoriteCities.length; i++) {
+                    if (state.favoriteCities[i-1] === undefined) {
+                        continue
+                    }
+                    if (state.favoriteCities[i].city === state.favoriteCities[i-1].city) {
+                        state.favoriteCities.splice(i,1)
+                    }
+                }
+            }
             localStorage.setItem('favoriteList', JSON.stringify(state.favoriteCities))
         },
         deleteFavoriteCity(state){
@@ -36,8 +47,8 @@ export const favorite = {
                 commit('deleteFavoriteCity')
             }else{
                 let array = JSON.parse(localStorage.getItem('favoriteList'))
-                array = array.filter(post => post.city !== payload.city)
-                localStorage.setItem('favoriteList', JSON.stringify(array))
+                state.favoriteCities = array.filter(post => post.city !== payload.city)
+                localStorage.setItem('favoriteList', JSON.stringify(state.favoriteCities))
             }
             
         },
