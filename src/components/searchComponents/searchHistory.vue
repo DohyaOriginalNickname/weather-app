@@ -4,13 +4,15 @@
             <div class="history__text">История поиска</div>
             <div class="history__clear" @click="$store.dispatch('deleteHistory')">Очистить</div>
         </div>
-        <div class="search-log border" v-for="log in dayHours" :key="log" @click="toTheStore(log)">
-            <div>
-                <img :src="log.img" class="search-list__image">
-            </div>
-            <div style="display:flex;">
-                <div class="search-log__city">
-                    <p>{{log.city}}</p>
+        <div class="scroll">
+            <div class="search-log border" v-for="log in dayHours" :key="log" @click="toTheStore(log)">
+                <div style="display: flex;">
+                    <div>
+                        <img :src="log.img" class="search-list__image">
+                    </div>
+                    <div class="search-log__city">
+                        <p>{{log.city}}</p>
+                    </div>
                 </div>
                 <div class="search-log__temp">
                     <p>
@@ -69,7 +71,10 @@ export default {
 </script>
 
 <style scoped>
-
+    .scroll{
+        overflow-y: scroll; 
+        max-height: 550px;
+    }
     .history{
         display: flex;
         justify-content: space-between;
@@ -95,6 +100,7 @@ export default {
         display: flex;
         min-width: 375px;
         height: 40px;
+        justify-content: space-between;
     }
     .search-log__city{
         min-width: 187px;
@@ -105,7 +111,7 @@ export default {
         color: #1C293D;
     }
     .search-log__temp{
-        position: absolute;
+        position: relative;
         right: 0;
         margin: 0 16px 0 0;
         min-width: 108px;

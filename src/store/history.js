@@ -6,7 +6,7 @@ export const history = {
     },
     mutations: {
         addToHistory(state, payload){
-            state.searchHistory.push(payload)
+            state.searchHistory.unshift(payload)
         },
         getHistory(state, payload){
             if(payload === null){

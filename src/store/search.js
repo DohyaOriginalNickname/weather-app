@@ -118,6 +118,9 @@ export const search = {
                 if(favoriteList[i] === undefined){
                     break
                 }
+                if(updateHistoryCities[iter] === undefined){
+                    break
+                }
                 if (updateHistoryCities[iter].city === favoriteList[i].city) {
                     updateHistoryCities[iter].favorite = true
                     i++
