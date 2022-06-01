@@ -67,7 +67,7 @@ export const search = {
                         iter.favorite
                     ))
                 }))
-                commit('updateFavoriteCity',updateCities)
+                commit('updateFavoriteCity',updateCities.sort((a,b) => a.id < b.id ? 1 : -1 ))
                 commit('setLoading', false)
             }else{
                 const server = `https://api.weatherapi.com/v1/forecast.json?key=55ef9d4e33a64c75afb55229221105&q=${payload.city}&days=1&aqi=yes&alerts=no`

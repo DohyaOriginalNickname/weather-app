@@ -6,9 +6,8 @@ export const favorite = {
     },
     mutations: {
         addFavoriteCity(state, payload){
-            payload.id = Date.now().toString()
+            payload.id = Date.now()
             state.favoriteCities.unshift(payload)
-            console.log(state.favoriteCities)
             if(state.favoriteCities.length > 1){
                 for (let i = 0; i < state.favoriteCities.length; i++) {
                     if (state.favoriteCities[i-1] === undefined) {
