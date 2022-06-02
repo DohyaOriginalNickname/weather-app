@@ -63,13 +63,25 @@ export default {
                     case 'Sunny':
                         data.img = require('@/assets/weather-icon/Sun.png')
                         break;
-                    case 'Cloudy','Overcast','Mist':
-                        data.img = require('@/assets/weather-icon/Union.png')
-                        break;
-                    case 'Moderate rain','Light rain shower','Light rain','Light drizzle','Patchy rain possible':
+                    case 'Light rain':
                         data.img = require('@/assets/weather-icon/Rain.png')
                         break;
-                    case 'Thunder':
+                    case 'Moderate rain':
+                        data.img = require('@/assets/weather-icon/Rain.png')
+                        break;
+                    case 'Light rain shower':
+                        data.img = require('@/assets/weather-icon/Rain.png')
+                        break;
+                    case 'Light drizzle':
+                        data.img = require('@/assets/weather-icon/Rain.png')
+                        break;
+                    case 'Patchy rain possible':
+                        data.img = require('@/assets/weather-icon/Rain.png')
+                        break;
+                    case 'Moderate or heavy rain with thunder':
+                        data.img = require('@/assets/weather-icon/Thunder.png')
+                        break;
+                    case 'Patchy light rain with thunder':
                         data.img = require('@/assets/weather-icon/Thunder.png')
                         break;
                     default:
@@ -123,7 +135,7 @@ export default {
 <style scoped>
     .scroll{
         overflow-y: scroll; 
-        max-height: 600px;
+        max-height: 594px;
     }
     .favorite-list{
         margin-top: 18px;
