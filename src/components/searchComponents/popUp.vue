@@ -41,27 +41,81 @@ export default {
         },
         getImg(){
             let img = ''
-            switch (this.possibleLocations.weather) {
-                case 'Partly cloudy':
-                    img = require('@/assets/weather-icon/SunCloudy.png')
-                    break;
-                case 'Sunny':
-                    img = require('@/assets/weather-icon/Sun.png')
-                    break;
-                case 'Cloudy','Overcast','Mist':
-                    img = require('@/assets/weather-icon/Union.png')
-                    break;
-                case 'Moderate rain','Light rain shower','Light rain','Light drizzle','Patchy rain possible':
-                    img = require('@/assets/weather-icon/Rain.png')
-                    break;
-                case 'Thunder':
-                    img = require('@/assets/weather-icon/Thunder.png')
-                    break;
-                default:
-                    img = require('@/assets/weather-icon/Union.png')
-                    break;
+            if(this.possibleLocations.isDay === 0){
+                switch (this.possibleLocations.weather) {
+                    case 'Partly cloudy':
+                        img = require('@/assets/weather-icon/Night.png')
+                        break;
+                    case 'Light rain':
+                        img = require('@/assets/weather-icon/Rain.png')
+                        break;
+                    case 'Moderate rain':
+                        img = require('@/assets/weather-icon/Rain.png')
+                        break;
+                    case 'Light rain shower':
+                        img = require('@/assets/weather-icon/Rain.png')
+                        break;
+                    case 'Light drizzle':
+                        img = require('@/assets/weather-icon/Rain.png')
+                        break;
+                    case 'Patchy rain possible':
+                        img = require('@/assets/weather-icon/Rain.png')
+                        break;
+                    case 'Moderate or heavy rain with thunder':
+                        img = require('@/assets/weather-icon/Thunder.png')
+                        break;
+                    case 'Patchy light rain with thunder':
+                        img = require('@/assets/weather-icon/Thunder.png')
+                        break;
+                    case 'Thundery outbreaks possible':
+                        img = require('@/assets/weather-icon/Thunder.png')
+                        break;
+                    default:
+                        img = require('@/assets/weather-icon/Union.png')
+                        break;
+                }
+                return img;
+            }else{
+                switch (this.possibleLocations.weather) {
+                    case 'Partly cloudy':
+                        img = require('@/assets/weather-icon/SunCloudy.png')
+                        break;
+                    case 'Sunny':
+                        img = require('@/assets/weather-icon/Sun.png')
+                        break;
+                    case 'Clear':
+                        img = require('@/assets/weather-icon/Sun.png')
+                        break;
+                    case 'Moderate rain':
+                        img = require('@/assets/weather-icon/Rain.png')
+                        break;
+                    case 'Light rain shower':
+                        img = require('@/assets/weather-icon/Rain.png')
+                        break;
+                    case 'Light rain':
+                        img = require('@/assets/weather-icon/Rain.png')
+                        break;
+                    case 'Light drizzle':
+                        img = require('@/assets/weather-icon/Rain.png')
+                        break;
+                    case 'Patchy rain possible':
+                        img = require('@/assets/weather-icon/Rain.png')
+                        break;
+                    case 'Moderate or heavy rain with thunder':
+                        img = require('@/assets/weather-icon/Thunder.png')
+                        break;
+                    case 'Patchy light rain with thunder':
+                        img = require('@/assets/weather-icon/Thunder.png')
+                        break;
+                    case 'Thundery outbreaks possible':
+                        img = require('@/assets/weather-icon/Thunder.png')
+                        break;
+                    default:
+                        img = require('@/assets/weather-icon/Union.png')
+                        break;
+                }
+                return img;
             }
-            return img
         }
     }
 }

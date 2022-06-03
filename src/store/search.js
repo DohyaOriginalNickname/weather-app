@@ -1,8 +1,9 @@
 class City{
-    constructor(country, city, currentHour, weather, temp, tempMin, tempMax, humidity, wind, dayHours, id, favorite){
+    constructor(country, city, currentHour, isDay, weather, temp, tempMin, tempMax, humidity, wind, dayHours, id, favorite){
         this.country = country
         this.city = city
         this.currentHour = currentHour
+        this.isDay = isDay
         this.weather = weather
         this.temp = temp
         this.tempMin = tempMin
@@ -22,7 +23,6 @@ export const search = {
     },
     mutations:{
         changeCity(state, payload){
-            console.log(payload)
             state.city = payload
         },
         possibleLocations(state, payload){
@@ -34,11 +34,11 @@ export const search = {
             const server = `https://api.weatherapi.com/v1/forecast.json?key=55ef9d4e33a64c75afb55229221105&q=${city}&days=1&aqi=yes&alerts=no`
             const response = await fetch(server,{method: 'GET'})
             const responseResult = await response.json()
-            console.log(responseResult)
             commit('changeCity', new City(
                 responseResult.location.country,
                 responseResult.location.name,
                 responseResult.location.localtime.slice(responseResult.location.localtime.indexOf(" "), responseResult.location.localtime.indexOf(":")).trim(),
+                responseResult.current.is_day,
                 responseResult.current.condition.text,
                 responseResult.current.temp_c,
                 responseResult.forecast.forecastday[0].day.mintemp_c,
@@ -61,6 +61,7 @@ export const search = {
                         responseResult.location.country,
                         responseResult.location.name,
                         responseResult.location.localtime.slice(responseResult.location.localtime.indexOf(" "), responseResult.location.localtime.indexOf(":")).trim(),
+                        responseResult.current.is_day,
                         responseResult.current.condition.text,
                         responseResult.current.temp_c,
                         responseResult.forecast.forecastday[0].day.mintemp_c,
@@ -82,6 +83,7 @@ export const search = {
                     responseResult.location.country,
                     responseResult.location.name,
                     responseResult.location.localtime.slice(responseResult.location.localtime.indexOf(" "), responseResult.location.localtime.indexOf(":")).trim(),
+                    responseResult.current.is_day,
                     responseResult.current.condition.text,
                     responseResult.current.temp_c,
                     responseResult.forecast.forecastday[0].day.mintemp_c,
@@ -112,6 +114,7 @@ export const search = {
                     responseResult.location.country,
                     responseResult.location.name,
                     responseResult.location.localtime.slice(responseResult.location.localtime.indexOf(" "), responseResult.location.localtime.indexOf(":")).trim(),
+                    responseResult.current.is_day,
                     responseResult.current.condition.text,
                     responseResult.current.temp_c,
                     responseResult.forecast.forecastday[0].day.mintemp_c,
@@ -146,6 +149,7 @@ export const search = {
                     responseResult.location.country,
                     responseResult.location.name,
                     responseResult.location.localtime.slice(responseResult.location.localtime.indexOf(" "), responseResult.location.localtime.indexOf(":")).trim(),
+                    responseResult.current.is_day,
                     responseResult.current.condition.text,
                     responseResult.current.temp_c,
                     responseResult.forecast.forecastday[0].day.mintemp_c,
