@@ -3,11 +3,11 @@
         <div class="info">
             <div class="info__other">
                 <div class="flex">
-                    <img src="@/assets/wind.png" alt="">
+                    <img src="@/assets/icons/wind.png" alt="">
                     <p class="info__other_text">{{city.wind}} км/ч</p>
                 </div>
                 <div class="flex">
-                    <img src="@/assets/humidity.png" alt="">
+                    <img src="@/assets/icons/humidity.png" alt="">
                     <p class="info__other_text">{{city.humidity}}%</p>
                 </div>
             </div>
@@ -24,7 +24,9 @@
                     <div v-for="hour in dayHours" :key="hour">
                         <div class="info-hour" :class="{ current: showCurrentHour === hour.time.slice(0,2)  }">
                             <div class="info-hour__text" style="font-weight: 600;">
-                                <p>{{hour.temp}}</p>
+                                <p v-if="hour.temp > 0">+{{(hour.temp).toFixed()}}°C</p>
+                                <p v-else-if="hour.temp < 0">{{(hour.temp).toFixed()}}°C</p>
+                                <p v-else>{{hour.temp}}°C</p>
                             </div>
                             <div>
                                 <img :src="hour.img" class="info-hour__img">
@@ -205,6 +207,7 @@ export default {
         bottom: 0;
     }
     .info__other{
+        font-weight: 200;
         color: white;
         display: flex;
         justify-content: space-between;
@@ -232,6 +235,7 @@ export default {
         margin: 0 16px 20px;
     }
     .info__temp{
+        font-weight: 400;
         width: 171px;
         height: 24px;
         font-size: 16px;

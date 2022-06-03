@@ -1,6 +1,6 @@
 <template>
     <div class="popup" :class="{ active: popup === true}">
-        <img src="@/assets/Color.png" alt="" class="popup__close" @click="$emit('closePopUp')">
+        <img src="@/assets/icons/Color.png" alt="" class="popup__close" @click="$emit('closePopUp')">
         <div class="popup__text">
             <p>Вы находитесь где то здесь:</p>
         </div>

@@ -1,7 +1,7 @@
 <template>
     <div style="display:flex;">
         <div>
-            <img src="@/assets/Vector.png" class="geolocation__logo">
+            <img src="@/assets/icons/Vector.png" class="geolocation__logo">
         </div>
         <div class="geolocation__text">
             <h3>{{nameCity}}</h3>

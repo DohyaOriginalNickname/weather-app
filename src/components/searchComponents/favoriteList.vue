@@ -13,7 +13,9 @@
                         <p>{{log.weather}}</p>
                     </div>
                     <div>
-                        <p>{{log.temp}}° С</p>
+                        <p v-if="log.temp > 0">+{{log.temp}}° С</p>
+                        <p v-else-if="log.temp < 0">{{log.temp}}° С</p>
+                        <p v-else>{{log.temp}}° С</p>
                     </div>
                 </div>
             </div>

@@ -16,7 +16,7 @@
                 </div>
                 <div class="search-log__temp">
                     <p>
-                        <a>{{Math.ceil(log.tempMax)}}°</a> / <a>{{Math.ceil(log.tempMin)}}°</a>
+                        <a><a v-if="log.tempMax > 0">+</a><a v-else-if="log.tempMax < 0">-</a>{{Math.ceil(log.tempMax)}}°</a> / <a><a v-if="log.tempMax > 0">+</a><a v-else-if="log.tempMax < 0">-</a>{{Math.ceil(log.tempMin)}}°</a>
                     </p>
                 </div>
             </div>

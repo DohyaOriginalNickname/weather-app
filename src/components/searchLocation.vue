@@ -5,7 +5,7 @@
             <div v-if="touch === false">
                 <div class="search" >
                     <a @click.prevent="$router.push('/')">
-                        <img src="@/assets/arrow.png" alt="" class="search__arrow">
+                        <img src="@/assets/icons/arrow.png" alt="" class="search__arrow">
                     </a>
                     <input 
                         type="text" 
@@ -13,14 +13,14 @@
                         class="search__input"
                         @focus="touch = true" 
                     >
-                    <img src="@/assets/focus.png" alt="" class="search__target" @click.stop="getCurrentLoc()">
+                    <img src="@/assets/icons/focus.png" alt="" class="search__target" @click.stop="getCurrentLoc()">
                 </div>
             </div>
             
             <div v-else>
                 <div class="search-focus" >
                     <a @click.prevent='this.touch = false'>
-                        <img src="@/assets/arrow.png" alt="" class="search__arrow">
+                        <img src="@/assets/icons/arrow.png" alt="" class="search__arrow">
                     </a>
                     <input 
                         type="text" 
@@ -29,8 +29,8 @@
                         @keyup="input()"
                         v-model="searchCity"
                     >
-                    <img src="@/assets/focus.png" alt="" class="search__target" v-if="searchCity === ''">
-                    <img src="@/assets/Color.png" alt="" class="search__target" v-else @click="clearInput()">
+                    <img src="@/assets/icons/focus.png" alt="" class="search__target" v-if="searchCity === ''">
+                    <img src="@/assets/icons/Color.png" alt="" class="search__target" v-else @click="clearInput()">
                 </div>
                 <div class="border-bottom"></div>
             </div>
@@ -56,7 +56,7 @@
             <pop-up :popup="popup" @closePopUp="closePopUp" ></pop-up>
 
             <div id="loader" v-if="loading === true">
-                <img src="@/assets/Vp3R.gif" alt="">
+                <img src="@/assets/gif/Vp3R.gif" alt="">
             </div>
         </div>
     </div>
