@@ -22,7 +22,7 @@
                 </div>
                 <div class="info__data">
                     <div v-for="hour in dayHours" :key="hour">
-                        <div class="info-hour">
+                        <div class="info-hour" :class="{ current: showCurrentHour === hour.time.slice(0,2)  }">
                             <div class="info-hour__text" style="font-weight: 600;">
                                 <p>{{hour.temp}}</p>
                             </div>
@@ -115,6 +115,42 @@ export default {
                 }
             }
             return todayDate
+        },
+        showCurrentHour(){
+            let currentHour
+            const hours = {
+                '0':'00',
+                '1':'01',
+                '2':'02',
+                '3':'03',
+                '4':'04',
+                '5':'05',
+                '6':'06',
+                '7':'07',
+                '8':'08',
+                '9':'09',
+                '10':'10',
+                '11':'11',
+                '12':'12',
+                '13':'13',
+                '14':'14',
+                '15':'15',
+                '16':'16',
+                '17':'17',
+                '18':'18',
+                '19':'19',
+                '20':'20',
+                '21':'21',
+                '22':'22',
+                '23':'23',
+            }
+
+            for (let i = 0; i < Object.keys(hours).length; i++) {
+                if(Object.keys(hours)[i] === this.city.currentHour){
+                    currentHour = Object.values(hours)[i]
+                }
+            }
+            return currentHour
         }
     }
 }
@@ -176,10 +212,12 @@ export default {
         gap: 16px;
         overflow-x: scroll;
     }
+    .current{
+        background: #E4F0FA;
+    }
     .info-hour{
         width: 64px;
         height: 136px;
-        background: #E4F0FA;
         border-radius: 12px;
         padding: 12px 8px;
     }
