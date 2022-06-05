@@ -130,7 +130,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
     .padding{
         padding-top:25px;
     }
@@ -153,7 +153,7 @@ export default {
     .border-bottom{
         min-width: 343px;
         height: 1px;
-        background: #E9E9E9;
+        background:$lines;
         margin: 0 0 25px 0;
     }   
     .search__arrow{
@@ -180,7 +180,7 @@ export default {
         font-size: 16px;
         line-height: 24px;
         text-align: center;
-        color: #B4B4B4;
+        color:$secondary;
     }
     .antisomething{
         top: 108px;

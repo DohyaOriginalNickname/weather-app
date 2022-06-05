@@ -20,19 +20,16 @@ export default {
 }
 </script>
 
-<style scoped>
-    
+<style scoped lang="scss">
     .geolocation__logo{
         height: 21px;
         margin: 0 11px 0 0;
     }
     .geolocation__text{
-        color: white;
+        color:$white;
         font-size: 16px;
         padding: 2px 0 0 0;
     }
-
-    
 </style>
 
 

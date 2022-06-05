@@ -106,9 +106,9 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
     .wrapper{
-        background-color: #47B1E6;
+        background-color: $accentDark;
     }
     .background__left{
         background-image: url("../assets/Background/Vector 12.png");
@@ -134,8 +134,8 @@ export default {
         height: 56px;
         bottom: 36px;
         border-radius: 8px;
-        background-color: white;
-        color:#47B1E6;
+        background-color: $white;
+        color:$accentDark;
         font-size:16px;
     }
     .geolocation{

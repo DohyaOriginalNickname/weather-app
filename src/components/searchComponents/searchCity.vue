@@ -45,7 +45,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
     .country{
         margin: 16px 16px;
     }
@@ -53,7 +53,7 @@ export default {
     .country__text{
         width: 343px;
         height: 24px;
-        color: #B4B4B4;
+        color: $secondary;
         font-size: 16px;
         line-height: 24px;
     }
@@ -69,7 +69,7 @@ export default {
         font-weight: 600;
         font-size: 16px;
         line-height: 24px;
-        color: #1C293D;
+        color: $primary;
     }
     .search-log__temp{
         position: absolute;
@@ -88,6 +88,6 @@ export default {
     }
 
     .border{
-        border-bottom: 1px solid #E9E9E9;
+        border-bottom: 1px solid $lines;
     }
 </style>

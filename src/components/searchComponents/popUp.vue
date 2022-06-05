@@ -121,12 +121,12 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
     .popup{
         border: 1px solid black;
         border-radius: 15px;
         position: fixed;
-        background-color: #fff;
+        background-color: $white;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%) scale(0);
@@ -158,7 +158,7 @@ export default {
         font-weight: 600;
         font-size: 20px;
         line-height: 28px;
-        color: #1C293D;
+        color:$primary;
         text-align: start;
         width: 188px;
         margin: 0 20px 0 10px;
@@ -167,6 +167,6 @@ export default {
         font-weight: 400;
         font-size: 16px;
         line-height: 24px;
-        color: #B4B4B4;
+        color:$secondary;
     }
 </style>

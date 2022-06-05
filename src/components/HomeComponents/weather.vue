@@ -34,10 +34,10 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
     .weather{
         text-align:  center;
-        color: white;
+        color:$white;
         margin: 50px 0 0 0;
     }
     .weather__temp{

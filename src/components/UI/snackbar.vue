@@ -29,7 +29,7 @@ export default {
 </script>
 
 
-<style scoped>
+<style scoped lang="scss">
     .snackbar{
         visibility: hidden;
         display: flex;
@@ -42,8 +42,8 @@ export default {
         position: fixed; 
         left: calc(50% - 283px/2);
         bottom: 24px; 
-        background: #FFFFFF;
-        border: 1px solid #E9E9E9;
+        background: $white;
+        border: 1px solid $lines;
         box-sizing: border-box;
         box-shadow: 2px 2px 4px rgba(11, 26, 34, 0.12);
         border-radius: 8px;
@@ -78,7 +78,7 @@ export default {
         font-size: 16px;
         line-height: 24px;
         text-align: right;
-        color: #47B1E6;
+        color: $accentDark;
         margin: 0px 8px;
     }
 </style>

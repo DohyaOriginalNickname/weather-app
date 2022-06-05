@@ -121,7 +121,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
     .scroll{
         overflow-y: scroll; 
         max-height: 550px;
@@ -142,7 +142,7 @@ export default {
     .history__clear{
         width: 171px;
         text-align: right;
-        color: #47B1E6;
+        color: $accentDark;
         cursor: pointer;
     }
 
@@ -159,7 +159,7 @@ export default {
         font-weight: 600;
         font-size: 16px;
         line-height: 24px;
-        color: #1C293D;
+        color: $primary;
     }
     .search-log__temp{
         position: relative;
@@ -178,6 +178,6 @@ export default {
     }
 
     .border{
-        border-bottom: 1px solid #E9E9E9;
+        border-bottom: 1px solid $lines ;
     }
 </style>

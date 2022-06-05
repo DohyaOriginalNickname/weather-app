@@ -173,7 +173,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
     .scroll{
         overflow-y: scroll; 
         max-height: 594px;
@@ -189,7 +189,7 @@ export default {
         font-weight: 600;
         font-size: 20px;
         line-height: 28px;
-        color: #1C293D;
+        color: $primary;
         text-align: start;
         width: 188px;
         margin: 0 20px 0 10px;
@@ -198,10 +198,9 @@ export default {
         font-weight: 400;
         font-size: 16px;
         line-height: 24px;
-        color: #B4B4B4;
+        color: $secondary;
     }
     .favorite-list__image{
-        
         width: 82px; 
         height:82px;
         margin: 0 16px;
@@ -214,7 +213,7 @@ export default {
     }
 
     .border{
-        border-bottom: 1px solid #E9E9E9;
+        border-bottom: 1px solid $lines;
     }
     .something{
         position: absolute;
@@ -225,6 +224,6 @@ export default {
         font-size: 16px;
         line-height: 24px;
         text-align: center;
-        color: #B4B4B4;
+        color: $secondary;
     }
 </style>

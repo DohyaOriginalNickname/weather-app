@@ -200,7 +200,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
     .info{
         position: absolute;
         width: 100%;
@@ -208,7 +208,7 @@ export default {
     }
     .info__other{
         font-weight: 200;
-        color: white;
+        color: $white;
         display: flex;
         justify-content: space-between;
         min-width: 95%;
@@ -225,7 +225,7 @@ export default {
     }
     .info__main{
         height: 220px;
-        background: #FFFFFF;
+        background: $white;
         border-radius: 24px 24px 0px 0px;
     }
     .info__text{
@@ -241,7 +241,7 @@ export default {
         font-size: 16px;
         line-height: 24px;
         text-align: right;
-        color: #1C293D;
+        color: $primary;
     }
     .info__date{
         width: 172px;
@@ -249,7 +249,7 @@ export default {
         font-weight: 600;
         font-size: 16px;
         line-height: 24px;
-        color: #1C293D;
+        color:$primary;
     }
     .info__data{
         padding: 0 10px;
@@ -259,7 +259,7 @@ export default {
         overflow-x: scroll;
     }
     .current{
-        background: #E4F0FA;
+        background:$accentLight;
     }
     .info-hour{
         width: 64px;
@@ -273,7 +273,7 @@ export default {
         font-size: 16px;
         line-height: 24px;
         text-align: center;
-        color: #1C293D;
+        color: $primary;
     }
     .info-hour__img{
         margin: 12px 4px;
