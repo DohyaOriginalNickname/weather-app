@@ -67,16 +67,16 @@ export default {
         left: calc(50% - 123px/2 - 32px);
         top: calc(50% - 24px/2);
         margin: 0px 8px;
-        font-size: 16px;
-        line-height: 24px;
+        font-size: $regular-size;
+        line-height: $line-height;
     }
     .snackbar__return{
         width: 88px;
         height: 24px;
         left: calc(50% - 88px/2 + 81.5px);
         top: calc(50% - 24px/2);
-        font-size: 16px;
-        line-height: 24px;
+        font-size: $regular-size;
+        line-height: $line-height;
         text-align: right;
         color: $accentDark;
         margin: 0px 8px;

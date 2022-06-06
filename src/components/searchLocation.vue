@@ -131,6 +131,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import "@/style/template.scss";
     .padding{
         padding-top:25px;
     }
@@ -164,23 +165,15 @@ export default {
     .search__input{
         width: 280px;
         height: 24px;
-        font-size: 16px;
-        line-height: 24px;
+        font-size: $regular-size;
+        line-height: $line-height;
     }
     .search__target{
         margin: 0 15px;
         margin-left: auto;
     }
     .something{
-        position: absolute;
-        width: 343px;
-        height: 24px;
-        left: calc(50% - 343px/2);
-        top: calc(50% - 24px/2 + 0.5px);
-        font-size: 16px;
-        line-height: 24px;
-        text-align: center;
-        color:$secondary;
+        @extend %something;
     }
     .antisomething{
         top: 108px;

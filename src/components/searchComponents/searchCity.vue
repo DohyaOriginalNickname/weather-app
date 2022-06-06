@@ -46,48 +46,33 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import "@/style/template.scss";
+@import "@/style/mixin.scss";
     .country{
         margin: 16px 16px;
     }
-
     .country__text{
         width: 343px;
         height: 24px;
         color: $secondary;
-        font-size: 16px;
-        line-height: 24px;
+        font-size: $regular-size;
+        line-height: $line-height;
     }
-
     .search-log{
         display: flex;
         min-width: 375px;
         height: 40px;
     }
     .search-log__city{
-        min-width: 187px;
-        height: 24px;
-        font-weight: 600;
-        font-size: 16px;
-        line-height: 24px;
-        color: $primary;
+        @extend %city-list__city;
     }
     .search-log__temp{
-        position: absolute;
-        right: 0;
-        margin: 0 16px 0 0;
-        min-width: 108px;
-        height: 24px;
-        font-size: 16px;
-        line-height: 24px;
-        text-align: right;
+        @include search-log__temp(absolute)
     }
     .search-list__image{
-        width: 16.89px; 
-        height:16.89px;
-        margin: 0 16px;
+        @extend %city-list__image;
     }
-
     .border{
-        border-bottom: 1px solid $lines;
+        @extend %border;
     }
 </style>

@@ -44,13 +44,13 @@ export default {
         margin-top: 5px;
         height: 56px;
         font-size: 48px;
-        font-weight: 600;
+        font-weight: $bold;
         min-width: 346px;
     }
 
     .weather__description{
-        font-size: 20px;
-        font-weight: 600;
+        font-size: $bigger-size;
+        font-weight: $bold;
         min-width: 346px;
         line-height: 20px;
     }

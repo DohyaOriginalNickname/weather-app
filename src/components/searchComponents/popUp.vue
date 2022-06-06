@@ -122,6 +122,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import "@/style/template.scss";;
     .popup{
         border: 1px solid black;
         border-radius: 15px;
@@ -155,18 +156,9 @@ export default {
         height:82px;
     }
     .search-list__info{
-        font-weight: 600;
-        font-size: 20px;
-        line-height: 28px;
-        color:$primary;
-        text-align: start;
-        width: 188px;
-        margin: 0 20px 0 10px;
+        @extend %city-list__info;
     }
     .search-list__info_weather{
-        font-weight: 400;
-        font-size: 16px;
-        line-height: 24px;
-        color:$secondary;
+        @extend %city-list__info_weather;
     }
 </style>

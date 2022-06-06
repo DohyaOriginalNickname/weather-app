@@ -1,0 +1,42 @@
+%city-list__info{
+    font-weight: 600;
+    font-size: $bigger-size;
+    line-height: 28px;
+    color:$primary;
+    text-align: start;
+    width: 188px;
+    margin: 0 20px 0 10px;
+}
+%city-list__info_weather{
+    font-weight: $regular;
+    font-size: $regular-size;
+    line-height: 24px;
+    color: $secondary;
+}
+%city-list__city{
+    min-width: 187px;
+    height: 24px;
+    font-weight: $bold;
+    font-size: $regular-size;
+    line-height: 24px;
+    color: $primary;
+}
+%city-list__image{
+    width: 16.89px; 
+    height:16.89px;
+    margin: 0 16px;
+}
+%border{
+    border-bottom: 1px solid $lines;
+}
+%something{
+    position: absolute;
+    width: 343px;
+    height: 24px;
+    left: calc(50% - 343px/2);
+    top: calc(50% - 24px/2 + 0.5px);
+    font-size: $regular-size;
+    line-height: $line-height;
+    text-align: center;
+    color:$secondary;
+}

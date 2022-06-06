@@ -122,6 +122,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import "@/style/template.scss";
+@import "@/style/mixin.scss";
     .scroll{
         overflow-y: scroll; 
         max-height: 550px;
@@ -130,22 +132,19 @@ export default {
         display: flex;
         justify-content: space-between;
         margin: 0 16px;
-        font-size: 16px;
-        line-height: 24px;
+        font-size: $regular-size;
+        line-height: $line-height;
     }
-
     .history__text{
         min-width: 171px;
         height: 24px;
     }
-
     .history__clear{
         width: 171px;
         text-align: right;
         color: $accentDark;
         cursor: pointer;
     }
-
     .search-log{
         margin: 16px 0;
         display: flex;
@@ -154,30 +153,15 @@ export default {
         justify-content: space-between;
     }
     .search-log__city{
-        min-width: 187px;
-        height: 24px;
-        font-weight: 600;
-        font-size: 16px;
-        line-height: 24px;
-        color: $primary;
+        @extend %city-list__city;
     }
     .search-log__temp{
-        position: relative;
-        right: 0;
-        margin: 0 16px 0 0;
-        min-width: 108px;
-        height: 24px;
-        font-size: 16px;
-        line-height: 24px;
-        text-align: right;
+        @include search-log__temp(relative)
     }
     .search-list__image{
-        width: 16.89px; 
-        height:16.89px;
-        margin: 0 16px;
+        @extend %city-list__image;
     }
-
     .border{
-        border-bottom: 1px solid $lines ;
+        @extend %border;
     }
 </style>

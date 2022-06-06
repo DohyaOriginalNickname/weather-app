@@ -207,14 +207,14 @@ export default {
         bottom: 0;
     }
     .info__other{
-        font-weight: 200;
+        font-weight: $thin;
         color: $white;
         display: flex;
         justify-content: space-between;
         min-width: 95%;
         height: 24px;
         margin: 0 16px 36px;
-        line-height: 24px;
+        line-height: $line-height;
     }
 
     .flex{
@@ -235,20 +235,20 @@ export default {
         margin: 0 16px 20px;
     }
     .info__temp{
-        font-weight: 400;
+        font-weight: $regular;
         width: 171px;
         height: 24px;
-        font-size: 16px;
-        line-height: 24px;
+        font-size: $regular-size;
+        line-height: $line-height;
         text-align: right;
         color: $primary;
     }
     .info__date{
         width: 172px;
         height: 24px;
-        font-weight: 600;
-        font-size: 16px;
-        line-height: 24px;
+        font-weight: $bold;
+        font-size: $regular-size;
+        line-height: $line-height;
         color:$primary;
     }
     .info__data{
@@ -270,8 +270,8 @@ export default {
     .info-hour__text{
         width: 48px;
         height: 24px;
-        font-size: 16px;
-        line-height: 24px;
+        font-size: $regular-size;
+        line-height: $line-height;
         text-align: center;
         color: $primary;
     }

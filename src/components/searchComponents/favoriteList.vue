@@ -174,6 +174,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import "@/style/template.scss";
     .scroll{
         overflow-y: scroll; 
         max-height: 594px;
@@ -186,19 +187,10 @@ export default {
         justify-content: space-between;
     }
     .favorite-list__info{
-        font-weight: 600;
-        font-size: 20px;
-        line-height: 28px;
-        color: $primary;
-        text-align: start;
-        width: 188px;
-        margin: 0 20px 0 10px;
+        @extend %city-list__info;
     }
     .favorite-list__info_weather{
-        font-weight: 400;
-        font-size: 16px;
-        line-height: 24px;
-        color: $secondary;
+        @extend %city-list__info_weather;
     }
     .favorite-list__image{
         width: 82px; 
@@ -213,17 +205,9 @@ export default {
     }
 
     .border{
-        border-bottom: 1px solid $lines;
+        @extend %border;
     }
     .something{
-        position: absolute;
-        width: 343px;
-        height: 24px;
-        left: calc(50% - 343px/2);
-        top: calc(50% - 24px/2 + 0.5px);
-        font-size: 16px;
-        line-height: 24px;
-        text-align: center;
-        color: $secondary;
+        @extend %something;
     }
 </style>

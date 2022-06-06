@@ -27,7 +27,7 @@ export default {
     }
     .geolocation__text{
         color:$white;
-        font-size: 16px;
+        font-size: $regular-size;
         padding: 2px 0 0 0;
     }
 </style>
