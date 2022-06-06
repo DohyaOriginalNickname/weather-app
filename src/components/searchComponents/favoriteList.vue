@@ -1,5 +1,5 @@
 <template>
-    <div v-if="cities.length !== 0 " class="scroll">
+    <div v-if="arrayCities.length !== 0 " class="scroll">
         <div class="favorite-list border" v-for="log in dayHours" :key="log.id" :id="log.id" @click="toTheStore(log)">
             <div style="display: flex; min-width: 250px;">
                 <div>
@@ -39,99 +39,18 @@
 <script>
 import snackbar from '../UI/snackbar.vue'
 import toTheStore from '@/mixins/toTheStore.js'
+import getImg from '@/mixins/getImgForArray'
 export default {
     components: { snackbar },
-    mixins: [toTheStore],
+    mixins: [toTheStore,getImg],
+    data(){
+        return{
+            revokeDelete: false
+        }
+    },
     computed: {
-        cities(){
+        arrayCities(){
             return this.$store.state.favorite.favoriteCities
-        },
-        data(){
-            return{
-                revokeDelete: false
-            }
-        },
-        dayHours(){
-            const dayHours = []
-            for (let i = 0; i < this.cities.length; i++) {
-                let data = {
-                    ...this.cities[i],
-                    img: '',
-                }
-                if(this.cities[i].isDay === 0){
-                    switch (this.cities[i].weather) {
-                        case 'Partly cloudy':
-                            data.img = require('@/assets/weather-icon/Night.png')
-                            break;
-                        case 'Light rain':
-                            data.img = require('@/assets/weather-icon/Rain.png')
-                            break;
-                        case 'Moderate rain':
-                            data.img = require('@/assets/weather-icon/Rain.png')
-                            break;
-                        case 'Light rain shower':
-                            data.img = require('@/assets/weather-icon/Rain.png')
-                            break;
-                        case 'Light drizzle':
-                            data.img = require('@/assets/weather-icon/Rain.png')
-                            break;
-                        case 'Patchy rain possible':
-                            data.img = require('@/assets/weather-icon/Rain.png')
-                            break;
-                        case 'Moderate or heavy rain with thunder':
-                            data.img = require('@/assets/weather-icon/Thunder.png')
-                            break;
-                        case 'Patchy light rain with thunder':
-                            data.img = require('@/assets/weather-icon/Thunder.png')
-                            break;
-                        case 'Thundery outbreaks possible':
-                            data.img = require('@/assets/weather-icon/Thunder.png')
-                            break;
-                        default:
-                            data.img = require('@/assets/weather-icon/Union.png')
-                            break;
-                    }
-                    dayHours.push(data)
-                }else{
-                    switch (this.cities[i].weather) {
-                        case 'Partly cloudy':
-                            data.img = require('@/assets/weather-icon/SunCloudy.png')
-                            break;
-                        case 'Sunny':
-                            data.img = require('@/assets/weather-icon/Sun.png')
-                            break;
-                        case 'Clear':
-                            data.img = require('@/assets/weather-icon/Sun.png')
-                            break;
-                        case 'Light rain':
-                            data.img = require('@/assets/weather-icon/Rain.png')
-                            break;
-                        case 'Moderate rain':
-                            data.img = require('@/assets/weather-icon/Rain.png')
-                            break;
-                        case 'Light rain shower':
-                            data.img = require('@/assets/weather-icon/Rain.png')
-                            break;
-                        case 'Light drizzle':
-                            data.img = require('@/assets/weather-icon/Rain.png')
-                            break;
-                        case 'Patchy rain possible':
-                            data.img = require('@/assets/weather-icon/Rain.png')
-                            break;
-                        case 'Moderate or heavy rain with thunder':
-                            data.img = require('@/assets/weather-icon/Thunder.png')
-                            break;
-                        case 'Patchy light rain with thunder':
-                            data.img = require('@/assets/weather-icon/Thunder.png')
-                            break;
-                        default:
-                            data.img = require('@/assets/weather-icon/Union.png')
-                            break;
-                    }
-                    dayHours.push(data)
-                }
-            }
-            return dayHours
         }
     },
     methods:{
