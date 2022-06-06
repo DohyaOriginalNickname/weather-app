@@ -5,5 +5,6 @@ module.exports = {
                 additionalData: `@import "@/style/variables.scss";`
             }
         }
-    }
+    },
+    publicPath:'/weather-app/'
 };
