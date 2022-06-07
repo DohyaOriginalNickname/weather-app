@@ -6,5 +6,5 @@ module.exports = {
             }
         }
     },
-    publicPath:'/weather-app/'
+    publicPath: process.env.NODE_ENV === 'production' ? '/weather-app/' : '/'
 };
