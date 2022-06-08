@@ -19,7 +19,7 @@
             
             <div v-else>
                 <div class="search-focus" >
-                    <a @click.prevent='this.touch = false'>
+                    <a @click.prevent="touch = false">
                         <img src="@/assets/icons/arrow.png" alt="" class="search__arrow">
                     </a>
                     <input 

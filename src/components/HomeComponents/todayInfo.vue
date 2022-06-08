@@ -22,7 +22,7 @@
                 </div>
                 <div class="info__data">
                     <div v-for="hour in dayHours" :key="hour">
-                        <div class="info-hour" :class="{ current: showCurrentHour === hour.time.slice(0,2)  }">
+                        <div class="info-hour" :class="{ current: showCurrentHour === hour.time.slice(0,2) }">
                             <div class="info-hour__text" style="font-weight: 600;">
                                 <p v-if="hour.temp > 0">+{{(hour.temp).toFixed()}}°C</p>
                                 <p v-else-if="hour.temp < 0">{{(hour.temp).toFixed()}}°C</p>
@@ -188,7 +188,6 @@ export default {
                 '22':'22',
                 '23':'23',
             }
-
             for (let i = 0; i < Object.keys(hours).length; i++) {
                 if(Object.keys(hours)[i] === this.city.currentHour){
                     currentHour = Object.values(hours)[i]
@@ -196,6 +195,9 @@ export default {
             }
             return currentHour
         }
+    },
+    mounted(){
+        document.querySelector('.current').scrollIntoView({inline:'center', behavior: 'smooth'})
     }
 }
 </script>
