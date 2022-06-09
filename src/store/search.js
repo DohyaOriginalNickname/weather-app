@@ -19,7 +19,8 @@ class City{
 export const search = {
     state: {
         city: {},
-        possibleLocations:{}
+        possibleLocations:{},
+        array: []
     },
     mutations:{
         changeCity(state, payload){
@@ -30,7 +31,14 @@ export const search = {
         }
     },
     actions: {
-        async fetchWeather({commit},city){
+        async fetchWeather({commit,state},city){
+            state.array.push(city)
+            if(state.array.length > 1){
+                setTimeout(()=>{
+                    state.array = []
+                },1000)
+                return null
+            }
             const server = `https://api.weatherapi.com/v1/forecast.json?key=55ef9d4e33a64c75afb55229221105&q=${city}&days=1&aqi=yes&alerts=no`
             const response = await fetch(server,{method: 'GET'})
             const responseResult = await response.json()
@@ -46,7 +54,7 @@ export const search = {
                 responseResult.current.humidity,
                 responseResult.current.wind_kph,
                 responseResult.forecast.forecastday[0].hour,
-            )) 
+            ))
         },
         async updateWeather({commit}, payload){
             const updateCities = []
